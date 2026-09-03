@@ -220,7 +220,7 @@ export default function RegisterOverlay({ open, onClose }) {
 
             <p className="mt-4 text-center text-[13px] text-muted">
               {t.timerNote}{" "}
-              <span className="font-mono font-bold tabular-nums text-ink">{mmss}</span>
+              <span className="font-mono font-bold tabular-nums text-red-600">{mmss}</span>
             </p>
             <p className="mt-3 text-center text-[12px] leading-relaxed text-muted/70">
               {t.consent}

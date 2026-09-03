@@ -51,27 +51,29 @@ export function Hero({ onRegister }) {
           {site.hero.subtitle}
         </p>
 
-        <div className="relative min-h-0 w-full flex-1">
-          <div
-            aria-hidden="true"
-            className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/45 blur-3xl"
-          />
-          <Image
-            src={site.expert.photo}
-            alt={site.expert.name}
-            fill
-            priority
-            sizes="(max-width: 640px) 92vw, 440px"
-            className="relative object-contain"
-          />
-        </div>
+        <div className="flex w-full flex-1 flex-col items-center justify-end">
+          <div className="relative aspect-square w-full max-w-[420px]">
+            <div
+              aria-hidden="true"
+              className="absolute left-1/2 top-1/2 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/45 blur-3xl"
+            />
+            <Image
+              src={site.expert.photo}
+              alt={site.expert.name}
+              fill
+              priority
+              sizes="(max-width: 640px) 92vw, 440px"
+              className="relative object-contain object-bottom"
+            />
+          </div>
 
-        <div className="w-full max-w-[420px] shrink-0">
-          <button type="button" onClick={onRegister} className="btn-primary w-full">
-            {site.hero.cta}
-          </button>
-          <div className="mt-3">
-            <HeroTimer note={site.hero.timerNote} />
+          <div className="w-full max-w-[420px] shrink-0">
+            <button type="button" onClick={onRegister} className="btn-primary w-full">
+              {site.hero.cta}
+            </button>
+            <div className="mt-3">
+              <HeroTimer note={site.hero.timerNote} />
+            </div>
           </div>
         </div>
       </div>

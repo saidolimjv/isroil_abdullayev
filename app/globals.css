@@ -45,27 +45,26 @@ body {
     @apply text-[26px] leading-[1.15] font-extrabold tracking-tight text-ink sm:text-[38px];
   }
 
-  /* Asosiy tugma — qora pill, referensdagi "Book a consultation" uslubi */
+  /* Asosiy tugma — yashil pill */
   .btn-primary {
-    @apply inline-flex w-full items-center justify-center rounded-full bg-ink px-7 py-4
-           text-[15px] font-extrabold tracking-wide text-paper
+    @apply inline-flex w-full items-center justify-center rounded-full bg-green-600 px-7 py-4
+           text-[15px] font-extrabold tracking-wide text-white
            transition-colors duration-150 active:scale-[0.985]
            sm:w-auto sm:text-base;
   }
   .btn-primary:hover {
-    background-color: #cbff4d;
-    color: #111110;
+    background-color: #15803d;
   }
 
-  /* Qorong'i kartalar ichida ishlatiladigan teskari tugma (limon fon) */
+  /* Qorong'i kartalar ichida ishlatiladigan tugma — bir xil yashil */
   .btn-invert {
-    @apply inline-flex w-full items-center justify-center rounded-full bg-lime px-7 py-4
-           text-[15px] font-extrabold tracking-wide text-ink
-           transition-transform duration-150 active:scale-[0.985]
+    @apply inline-flex w-full items-center justify-center rounded-full bg-green-600 px-7 py-4
+           text-[15px] font-extrabold tracking-wide text-white
+           transition-colors duration-150 active:scale-[0.985]
            sm:w-auto sm:text-base;
   }
   .btn-invert:hover {
-    opacity: 0.88;
+    background-color: #15803d;
   }
 
   /* Oq karta — nozik chegara bilan */
