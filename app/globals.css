@@ -45,15 +45,15 @@ body {
     @apply text-[26px] leading-[1.15] font-extrabold tracking-tight text-ink sm:text-[38px];
   }
 
-  /* "Davom etish" / "Telegramga o'tish" — och yashil, sayt stilistikasiga mos */
+  /* "Davom etish" / "Telegramga o'tish" — qizil */
   .btn-primary {
-    @apply inline-flex w-full items-center justify-center rounded-full bg-green-600 px-7 py-4
+    @apply inline-flex w-full items-center justify-center rounded-full bg-red-600 px-7 py-4
            text-[15px] font-extrabold tracking-wide text-white
            transition-colors duration-150 active:scale-[0.985]
            sm:w-auto sm:text-base;
   }
   .btn-primary:hover {
-    background-color: #15803d;
+    background-color: #b91c1c;
   }
 
   /* "Seminarga yozilish" — qizil, urg'u uchun */

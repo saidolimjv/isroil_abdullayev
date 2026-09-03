@@ -64,6 +64,7 @@ export default function RegisterOverlay({ open, onClose }) {
   if (!open) return null;
 
   const digits = phone.replace(/\D/g, "");
+  const isComplete = name.trim().length >= 2 && digits.length === 9 && !!format;
   const mmss = `${String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:${String(
     secondsLeft % 60
   ).padStart(2, "0")}`;
@@ -212,8 +213,8 @@ export default function RegisterOverlay({ open, onClose }) {
             <button
               type="button"
               onClick={submit}
-              disabled={sending}
-              className="btn-primary mt-7 w-full disabled:opacity-60"
+              disabled={sending || !isComplete}
+              className="btn-primary mt-7 w-full disabled:cursor-not-allowed disabled:bg-ink/20 disabled:text-ink/40"
             >
               {sending ? t.sending : t.submit}
             </button>
