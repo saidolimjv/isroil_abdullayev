@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #070b14;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Klaviatura bilan yurganda fokus ko'rinib tursin */
+:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 3px;
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-page px-5 sm:px-6;
+  }
+
+  .section-title {
+    @apply text-[26px] leading-[1.15] font-extrabold tracking-tight sm:text-[38px];
+  }
+
+  .btn-primary {
+    @apply inline-flex w-full items-center justify-center rounded-2xl px-6 py-4
+           text-[15px] font-extrabold tracking-wide text-white
+           transition-transform duration-150 active:scale-[0.985]
+           sm:w-auto sm:text-base;
+    background-image: linear-gradient(100deg, #2563eb 0%, #7c3aed 100%);
+    box-shadow: 0 10px 34px -12px rgba(124, 58, 237, 0.85);
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+}
+
+/* Bosh sahifadagi yumshoq yorug'lik */
+.glow-top {
+  background:
+    radial-gradient(760px 420px at 78% -8%, rgba(124, 58, 237, 0.28), transparent 62%),
+    radial-gradient(620px 380px at 8% 4%, rgba(37, 99, 235, 0.22), transparent 60%);
+}
+
+.overlay-enter {
+  animation: overlayIn 220ms ease-out both;
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

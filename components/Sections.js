@@ -1,0 +1,451 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import site from "@/content/site";
+import Countdown from "./Countdown";
+
+const e = site.event;
+
+/* ---------------------------------- Ticket strip ---------------------------------- */
+
+function TicketStrip() {
+  const cells = [
+    { top: e.dateLabel, bottom: e.dayLabel },
+    { top: e.venue, bottom: e.city },
+    { top: e.time, bottom: e.duration },
+  ];
+  return (
+    <div className="inline-flex w-full flex-wrap items-stretch overflow-hidden rounded-xl border border-line bg-surface/70 sm:w-auto">
+      {cells.map((c, i) => (
+        <div
+          key={c.top}
+          className={
+            "flex-1 px-4 py-2.5 sm:flex-none sm:px-5 " +
+            (i > 0 ? "border-l border-line" : "")
+          }
+        >
+          <div className="whitespace-nowrap text-[15px] font-extrabold leading-tight">
+            {c.top}
+          </div>
+          <div className="mt-0.5 whitespace-nowrap text-[12px] text-muted">{c.bottom}</div>
+        </div>
+      ))}
+      <div className="flex items-center border-line bg-violet/15 px-4 py-2.5 text-[12px] font-extrabold tracking-[0.14em] text-violet sm:border-l sm:px-5">
+        {e.format}
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------- Hero -------------------------------------- */
+
+export function Hero({ onRegister }) {
+  return (
+    <header className="glow-top relative border-b border-line pb-14 pt-7 sm:pb-20 sm:pt-10">
+      <div className="wrap">
+        <TicketStrip />
+
+        <div className="mt-9 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-14">
+          <div>
+            <h1 className="max-w-[15ch] text-[34px] font-extrabold leading-[1.06] tracking-[-0.02em] sm:text-[52px] lg:text-[58px]">
+              {site.hero.title}
+            </h1>
+            <p className="mt-6 max-w-[52ch] text-[16px] leading-relaxed text-muted sm:text-[18px]">
+              {site.hero.subtitle}
+            </p>
+
+            <ul className="mt-9 divide-y divide-line border-y border-line">
+              {site.hero.outcomes.map((o) => (
+                <li key={o.title} className="flex gap-4 py-4">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-2 w-2 shrink-0 rounded-full bg-violet"
+                  />
+                  <div>
+                    <div className="text-[17px] font-bold leading-snug">{o.title}</div>
+                    <div className="mt-1 text-[15px] leading-relaxed text-muted">{o.text}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-9 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
+              <button type="button" onClick={onRegister} className="btn-primary">
+                {site.hero.cta}
+              </button>
+              <Countdown target={e.startsAt} />
+            </div>
+          </div>
+
+          <div className="lg:pt-2">
+            <div className="card overflow-hidden">
+              <div className="relative aspect-square w-full bg-line">
+                <Image
+                  src={site.expert.photo}
+                  alt={site.expert.name}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 420px"
+                  className="object-cover"
+                />
+              </div>
+              <div className="border-t border-line p-5">
+                <div className="text-[19px] font-extrabold">{site.expert.name}</div>
+                <p className="mt-2 text-[14px] leading-relaxed text-muted">
+                  {site.expert.bio[0]}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/* -------------------------------------- Pain -------------------------------------- */
+
+export function Pain() {
+  return (
+    <section className="border-b border-line py-14 sm:py-20">
+      <div className="wrap max-w-[820px]">
+        <h2 className="section-title">{site.pain.title}</h2>
+        <ul className="mt-8 space-y-4">
+          {site.pain.items.map((item) => (
+            <li key={item} className="flex gap-3.5 text-[16px] leading-relaxed sm:text-[17px]">
+              <span aria-hidden="true" className="mt-[9px] h-px w-5 shrink-0 bg-muted/60" />
+              <span className="text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-9 border-l-2 border-violet pl-5 text-[17px] font-bold leading-relaxed sm:text-[20px]">
+          {site.pain.conclusion}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------ Program ------------------------------------- */
+
+export function Program({ onRegister }) {
+  return (
+    <section id="dastur" className="border-b border-line py-14 sm:py-20">
+      <div className="wrap">
+        <h2 className="section-title">{site.program.title}</h2>
+        <p className="mt-4 max-w-[58ch] text-[16px] leading-relaxed text-muted">
+          {site.program.note}
+        </p>
+
+        <ol className="mt-10 border-t border-line">
+          {site.program.blocks.map((b) => (
+            <li
+              key={b.time}
+              className="grid gap-2 border-b border-line py-6 sm:grid-cols-[110px_1fr] sm:gap-8"
+            >
+              <div
+                className={
+                  "font-mono text-[17px] font-bold tabular-nums " +
+                  (b.muted ? "text-muted/60" : "text-violet")
+                }
+              >
+                {b.time}
+              </div>
+              <div>
+                <h3
+                  className={
+                    "text-[19px] font-bold leading-snug sm:text-[21px] " +
+                    (b.muted ? "text-muted" : "")
+                  }
+                >
+                  {b.title}
+                </h3>
+                <p className="mt-2 max-w-[62ch] text-[15px] leading-relaxed text-muted sm:text-[16px]">
+                  {b.text}
+                </p>
+                {b.tools ? (
+                  <p className="mt-3 font-mono text-[13px] text-muted/70">{b.tools}</p>
+                ) : null}
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <button type="button" onClick={onRegister} className="btn-primary mt-10">
+          {site.hero.cta}
+        </button>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------- Fit -------------------------------------- */
+
+export function Fit() {
+  return (
+    <section className="border-b border-line py-14 sm:py-20">
+      <div className="wrap">
+        <h2 className="section-title">{site.fit.title}</h2>
+        <div className="mt-9 grid gap-4 lg:grid-cols-2">
+          <div className="card p-6 sm:p-7">
+            <h3 className="text-[18px] font-extrabold text-emerald-400">{site.fit.yes.title}</h3>
+            <ul className="mt-5 space-y-4">
+              {site.fit.yes.items.map((i) => (
+                <li key={i} className="flex gap-3 text-[15px] leading-relaxed sm:text-[16px]">
+                  <span className="mt-0.5 shrink-0 text-emerald-400" aria-hidden="true">
+                    ✓
+                  </span>
+                  <span>{i}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="card p-6 sm:p-7">
+            <h3 className="text-[18px] font-extrabold text-muted">{site.fit.no.title}</h3>
+            <ul className="mt-5 space-y-4">
+              {site.fit.no.items.map((i) => (
+                <li
+                  key={i}
+                  className="flex gap-3 text-[15px] leading-relaxed text-muted sm:text-[16px]"
+                >
+                  <span className="mt-0.5 shrink-0" aria-hidden="true">
+                    ✕
+                  </span>
+                  <span>{i}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="card mt-4 border-violet/40 bg-violet/10 p-6 sm:p-7">
+          <h3 className="text-[19px] font-extrabold leading-snug sm:text-[21px]">
+            {site.objection.title}
+          </h3>
+          <p className="mt-3 max-w-[68ch] text-[15px] leading-relaxed text-muted sm:text-[16px]">
+            {site.objection.text}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------- Expert ------------------------------------- */
+
+export function Expert() {
+  return (
+    <section className="border-b border-line py-14 sm:py-20">
+      <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+        <div className="card overflow-hidden">
+          <div className="relative aspect-square w-full bg-line">
+            <Image
+              src={site.expert.photo}
+              alt={site.expert.name}
+              fill
+              sizes="(max-width: 1024px) 100vw, 380px"
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        <div>
+          <h2 className="section-title">{site.expert.name}</h2>
+          <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+            {site.expert.facts.map((f) => (
+              <div key={f.label} className="bg-surface px-5 py-5">
+                <div className="text-[24px] font-extrabold leading-none sm:text-[28px]">
+                  {f.value}
+                </div>
+                <div className="mt-2 text-[13px] leading-snug text-muted">{f.label}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-7 space-y-4">
+            {site.expert.bio.map((p) => (
+              <p key={p} className="max-w-[62ch] text-[16px] leading-relaxed text-muted">
+                {p}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------ Takeaways + narx ---------------------------------- */
+
+export function Offer({ onRegister }) {
+  return (
+    <section id="narx" className="border-b border-line py-14 sm:py-20">
+      <div className="wrap grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+        <div>
+          <h2 className="section-title">{site.takeaways.title}</h2>
+          <ul className="mt-8 divide-y divide-line border-y border-line">
+            {site.takeaways.items.map((i) => (
+              <li key={i} className="flex gap-3.5 py-4 text-[16px] leading-relaxed">
+                <span className="mt-0.5 shrink-0 text-violet" aria-hidden="true">
+                  ✓
+                </span>
+                <span>{i}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="card overflow-hidden self-start">
+          <div className="p-7">
+            <div className="text-[13px] text-muted">Ishtirok narxi</div>
+            <div className="mt-2 flex items-baseline gap-2">
+              <span className="text-[44px] font-extrabold leading-none tracking-tight sm:text-[52px]">
+                {e.price}
+              </span>
+              <span className="text-[18px] font-bold text-muted">{e.currency}</span>
+            </div>
+
+            <dl className="mt-7 space-y-3 text-[15px]">
+              {[
+                ["Sana", `${e.dateLabel}, ${e.dayLabel}`],
+                ["Vaqt", e.time],
+                ["Manzil", `${e.venue}, ${e.city}`],
+                ["Format", "Offline"],
+              ].map(([k, v]) => (
+                <div key={k} className="flex justify-between gap-4 border-b border-line pb-3">
+                  <dt className="text-muted">{k}</dt>
+                  <dd className="text-right font-bold">{v}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="mt-6 rounded-xl border border-amber/40 bg-amber/10 px-4 py-3 text-[14px] font-bold text-amber">
+              Joy soni cheklangan — atigi {e.seatsTotal} ta
+            </div>
+
+            <button type="button" onClick={onRegister} className="btn-primary mt-6 w-full">
+              {site.hero.cta}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------- FAQ -------------------------------------- */
+
+export function Faq() {
+  const [open, setOpen] = useState(0);
+  return (
+    <section className="border-b border-line py-14 sm:py-20">
+      <div className="wrap max-w-[820px]">
+        <h2 className="section-title">Ko'p beriladigan savollar</h2>
+        <div className="mt-9 border-t border-line">
+          {site.faq.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={f.q} className="border-b border-line">
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  aria-expanded={isOpen}
+                  className="flex w-full items-start justify-between gap-6 py-5 text-left"
+                >
+                  <span className="text-[16px] font-bold leading-snug sm:text-[18px]">{f.q}</span>
+                  <span
+                    aria-hidden="true"
+                    className={
+                      "mt-0.5 shrink-0 text-[22px] leading-none text-violet transition-transform duration-200 " +
+                      (isOpen ? "rotate-45" : "")
+                    }
+                  >
+                    +
+                  </span>
+                </button>
+                {isOpen ? (
+                  <p className="max-w-[62ch] pb-5 text-[15px] leading-relaxed text-muted sm:text-[16px]">
+                    {f.a}
+                  </p>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------ Final CTA ----------------------------------- */
+
+export function FinalCta({ onRegister }) {
+  return (
+    <section className="glow-top py-16 sm:py-24">
+      <div className="wrap max-w-[760px] text-center">
+        <h2 className="section-title">Keyingisi — sizning biznesingiz</h2>
+        <p className="mx-auto mt-5 max-w-[48ch] text-[16px] leading-relaxed text-muted sm:text-[18px]">
+          {e.dateLabel}, {e.time}, {e.venue}. {e.duration} ichida biznesingizda AI-xodimlar
+          qanday ishga tushishini o'z ko'zingiz bilan ko'rasiz.
+        </p>
+        <div className="mx-auto mt-9 max-w-[420px]">
+          <Countdown target={e.startsAt} />
+        </div>
+        <div className="mt-8">
+          <button type="button" onClick={onRegister} className="btn-primary">
+            {site.hero.cta}
+          </button>
+        </div>
+        <p className="mt-5 text-[14px] text-muted">
+          {e.price} {e.currency} · {e.seatsTotal} ta joy
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------- Footer ------------------------------------ */
+
+export function Footer() {
+  return (
+    <footer className="border-t border-line py-9">
+      <div className="wrap">
+        <p className="text-[14px] font-bold">
+          © {new Date().getFullYear()} {site.footer.text}
+        </p>
+        <p className="mt-1.5 text-[13px] text-muted">
+          {e.city}, {e.venue} · {e.dateLabel}, {e.time}
+        </p>
+        <p className="mt-4 max-w-[70ch] text-[12px] leading-relaxed text-muted/60">
+          {site.footer.disclaimer}
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+/* --------------------------- Mobil uchun pastki yopishqoq CTA ---------------------- */
+
+export function StickyBar({ onRegister }) {
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/95 px-4 py-3 backdrop-blur lg:hidden">
+      <div className="flex items-center gap-3">
+        <div className="min-w-0">
+          <div className="text-[15px] font-extrabold leading-none">
+            {e.price} <span className="text-[12px] font-bold text-muted">{e.currency}</span>
+          </div>
+          <div className="mt-1 truncate text-[11px] text-muted">
+            {e.dateLabel} · {e.venue}
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onRegister}
+          className="btn-primary ml-auto !w-auto !px-5 !py-3 !text-[13px]"
+        >
+          {site.hero.cta}
+        </button>
+      </div>
+    </div>
+  );
+}
