@@ -52,7 +52,7 @@ export function Hero({ onRegister }) {
         </p>
 
         <div className="flex w-full flex-1 flex-col items-center justify-end">
-          <div className="relative aspect-square w-full max-w-[420px]">
+          <div className="relative aspect-square w-full max-w-[399px]">
             <div
               aria-hidden="true"
               className="absolute left-1/2 top-1/2 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/45 blur-3xl"
@@ -62,13 +62,13 @@ export function Hero({ onRegister }) {
               alt={site.expert.name}
               fill
               priority
-              sizes="(max-width: 640px) 92vw, 440px"
+              sizes="(max-width: 640px) 87vw, 418px"
               className="relative object-contain object-bottom"
             />
           </div>
 
           <div className="w-full max-w-[420px] shrink-0">
-            <button type="button" onClick={onRegister} className="btn-primary w-full">
+            <button type="button" onClick={onRegister} className="btn-cta w-full">
               {site.hero.cta}
             </button>
             <div className="mt-3">
@@ -178,7 +178,7 @@ export function Program({ onRegister }) {
           ))}
         </ol>
 
-        <button type="button" onClick={onRegister} className="btn-primary mt-10">
+        <button type="button" onClick={onRegister} className="btn-cta mt-10">
           {site.hero.cta}
         </button>
       </div>
@@ -405,7 +405,7 @@ export function FinalCta({ onRegister }) {
             <Countdown target={e.startsAt} />
           </div>
           <div className="mt-8">
-            <button type="button" onClick={onRegister} className="btn-primary">
+            <button type="button" onClick={onRegister} className="btn-cta">
               {site.hero.cta}
             </button>
           </div>
@@ -466,7 +466,7 @@ export function StickyBar({ onRegister }) {
         <button
           type="button"
           onClick={onRegister}
-          className="btn-primary ml-auto !w-auto !px-5 !py-3 !text-[13px]"
+          className="btn-cta ml-auto !w-auto !px-5 !py-3 !text-[13px]"
         >
           {site.hero.cta}
         </button>
