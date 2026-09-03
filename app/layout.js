@@ -10,7 +10,7 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "1386235712953904";
 
 export const metadata = {
   metadataBase: new URL(

@@ -111,7 +111,7 @@ async function sendToTelegram({ name, phone, format }) {
 /* --------------------------- Meta Conversions API (CAPI) -------------------------- */
 
 async function sendToMeta({ name, phone, eventId, pageUrl, fbp, fbc, ua, ip }) {
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "1386235712953904";
   const token = process.env.META_CAPI_TOKEN;
   if (!pixelId || !token) return "skipped";
 
