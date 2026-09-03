@@ -26,7 +26,7 @@ export default function HeroTimer({ note }) {
         <span aria-hidden="true" className="text-[18px]">
           ⏱
         </span>
-        <span className="font-mono text-[24px] font-extrabold tabular-nums tracking-wide text-violet sm:text-[26px]">
+        <span className="font-mono text-[24px] font-extrabold tabular-nums tracking-wide text-ink sm:text-[26px]">
           {ready ? mmss : "02:00"}
         </span>
       </div>

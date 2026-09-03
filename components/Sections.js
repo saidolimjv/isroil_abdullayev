@@ -17,13 +17,13 @@ function TicketStrip() {
     { top: e.time, bottom: e.duration },
   ];
   return (
-    <div className="flex w-full max-w-[520px] items-stretch overflow-hidden rounded-xl border border-line bg-surface/70">
+    <div className="flex w-full max-w-[520px] items-stretch overflow-hidden rounded-2xl border border-line bg-paper">
       {cells.map((c, i) => (
         <div
           key={c.top}
-          className={"flex-1 px-2 py-2 sm:px-4 " + (i > 0 ? "border-l border-line" : "")}
+          className={"flex-1 px-2 py-2.5 sm:px-4 " + (i > 0 ? "border-l border-line" : "")}
         >
-          <div className="whitespace-nowrap text-[13px] font-extrabold leading-tight sm:text-[15px]">
+          <div className="whitespace-nowrap text-[13px] font-extrabold leading-tight text-ink sm:text-[15px]">
             {c.top}
           </div>
           <div className="mt-0.5 whitespace-nowrap text-[11px] text-muted sm:text-[12px]">
@@ -43,7 +43,7 @@ export function Hero({ onRegister }) {
       <div className="wrap flex flex-1 flex-col items-center justify-start gap-4 pb-5 pt-4 text-center sm:gap-6 sm:pb-8 sm:pt-7">
         <TicketStrip />
 
-        <h1 className="max-w-[18ch] text-[clamp(27px,7.4vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
+        <h1 className="max-w-[18ch] text-[clamp(27px,7.4vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink">
           {site.hero.title}
         </h1>
 
@@ -54,7 +54,7 @@ export function Hero({ onRegister }) {
         <div className="relative min-h-0 w-full flex-1">
           <div
             aria-hidden="true"
-            className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet/25 blur-3xl"
+            className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/45 blur-3xl"
           />
           <Image
             src={site.expert.photo}
@@ -62,7 +62,7 @@ export function Hero({ onRegister }) {
             fill
             priority
             sizes="(max-width: 640px) 92vw, 440px"
-            className="relative rounded-[28px] object-contain"
+            className="relative object-contain"
           />
         </div>
 
@@ -89,9 +89,9 @@ export function Outcomes() {
         <ul className="mt-8 divide-y divide-line border-y border-line">
           {site.outcomes.items.map((o) => (
             <li key={o.title} className="flex gap-4 py-5">
-              <span aria-hidden="true" className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-violet" />
+              <span aria-hidden="true" className="mt-2.5 h-2.5 w-2.5 shrink-0 rounded-full bg-lime ring-1 ring-ink/10" />
               <div>
-                <div className="text-[18px] font-bold leading-snug sm:text-[20px]">{o.title}</div>
+                <div className="text-[18px] font-bold leading-snug text-ink sm:text-[20px]">{o.title}</div>
                 <div className="mt-1.5 max-w-[62ch] text-[15px] leading-relaxed text-muted sm:text-[16px]">
                   {o.text}
                 </div>
@@ -114,14 +114,16 @@ export function Pain() {
         <ul className="mt-8 space-y-4">
           {site.pain.items.map((item) => (
             <li key={item} className="flex gap-3.5 text-[16px] leading-relaxed sm:text-[17px]">
-              <span aria-hidden="true" className="mt-[9px] h-px w-5 shrink-0 bg-muted/60" />
+              <span aria-hidden="true" className="mt-[9px] h-px w-5 shrink-0 bg-ink/30" />
               <span className="text-muted">{item}</span>
             </li>
           ))}
         </ul>
-        <p className="mt-9 border-l-2 border-violet pl-5 text-[17px] font-bold leading-relaxed sm:text-[20px]">
-          {site.pain.conclusion}
-        </p>
+        <div className="card-dark mt-9 p-6 sm:p-8">
+          <p className="text-[17px] font-bold leading-relaxed sm:text-[20px]">
+            {site.pain.conclusion}
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -142,21 +144,23 @@ export function Program({ onRegister }) {
           {site.program.blocks.map((b) => (
             <li
               key={b.time}
-              className="grid gap-2 border-b border-line py-6 sm:grid-cols-[110px_1fr] sm:gap-8"
+              className="grid gap-3 border-b border-line py-6 sm:grid-cols-[110px_1fr] sm:gap-8"
             >
-              <div
-                className={
-                  "font-mono text-[17px] font-bold tabular-nums " +
-                  (b.muted ? "text-muted/60" : "text-violet")
-                }
-              >
-                {b.time}
+              <div>
+                <span
+                  className={
+                    "inline-flex rounded-lg px-2.5 py-1 font-mono text-[15px] font-extrabold tabular-nums " +
+                    (b.muted ? "bg-panel text-muted" : "bg-lime text-ink")
+                  }
+                >
+                  {b.time}
+                </span>
               </div>
               <div>
                 <h3
                   className={
                     "text-[19px] font-bold leading-snug sm:text-[21px] " +
-                    (b.muted ? "text-muted" : "")
+                    (b.muted ? "text-muted" : "text-ink")
                   }
                 >
                   {b.title}
@@ -165,7 +169,7 @@ export function Program({ onRegister }) {
                   {b.text}
                 </p>
                 {b.tools ? (
-                  <p className="mt-3 font-mono text-[13px] text-muted/70">{b.tools}</p>
+                  <p className="mt-3 font-mono text-[13px] text-muted/80">{b.tools}</p>
                 ) : null}
               </div>
             </li>
@@ -189,11 +193,14 @@ export function Fit() {
         <h2 className="section-title">{site.fit.title}</h2>
         <div className="mt-9 grid gap-4 lg:grid-cols-2">
           <div className="card p-6 sm:p-7">
-            <h3 className="text-[18px] font-extrabold text-emerald-400">{site.fit.yes.title}</h3>
+            <h3 className="text-[18px] font-extrabold text-ink">{site.fit.yes.title}</h3>
             <ul className="mt-5 space-y-4">
               {site.fit.yes.items.map((i) => (
-                <li key={i} className="flex gap-3 text-[15px] leading-relaxed sm:text-[16px]">
-                  <span className="mt-0.5 shrink-0 text-emerald-400" aria-hidden="true">
+                <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-ink sm:text-[16px]">
+                  <span
+                    aria-hidden="true"
+                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime text-[12px] font-extrabold text-ink"
+                  >
                     ✓
                   </span>
                   <span>{i}</span>
@@ -201,15 +208,15 @@ export function Fit() {
               ))}
             </ul>
           </div>
-          <div className="card p-6 sm:p-7">
-            <h3 className="text-[18px] font-extrabold text-muted">{site.fit.no.title}</h3>
+          <div className="card-dark p-6 sm:p-7">
+            <h3 className="text-[18px] font-extrabold text-paper/70">{site.fit.no.title}</h3>
             <ul className="mt-5 space-y-4">
               {site.fit.no.items.map((i) => (
                 <li
                   key={i}
-                  className="flex gap-3 text-[15px] leading-relaxed text-muted sm:text-[16px]"
+                  className="flex gap-3 text-[15px] leading-relaxed text-paper/80 sm:text-[16px]"
                 >
-                  <span className="mt-0.5 shrink-0" aria-hidden="true">
+                  <span className="mt-0.5 shrink-0 text-paper/40" aria-hidden="true">
                     ✕
                   </span>
                   <span>{i}</span>
@@ -219,11 +226,11 @@ export function Fit() {
           </div>
         </div>
 
-        <div className="card mt-4 border-violet/40 bg-violet/10 p-6 sm:p-7">
-          <h3 className="text-[19px] font-extrabold leading-snug sm:text-[21px]">
+        <div className="card mt-4 border-lime bg-lime/15 p-6 sm:p-7">
+          <h3 className="text-[19px] font-extrabold leading-snug text-ink sm:text-[21px]">
             {site.objection.title}
           </h3>
-          <p className="mt-3 max-w-[68ch] text-[15px] leading-relaxed text-muted sm:text-[16px]">
+          <p className="mt-3 max-w-[68ch] text-[15px] leading-relaxed text-ink/70 sm:text-[16px]">
             {site.objection.text}
           </p>
         </div>
@@ -239,23 +246,23 @@ export function Expert() {
     <section className="border-b border-line py-14 sm:py-20">
       <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
         <div className="card overflow-hidden">
-          <div className="relative aspect-square w-full bg-line">
+          <div className="relative aspect-square w-full bg-panel">
             <Image
               src={site.expert.photo}
               alt={site.expert.name}
               fill
               sizes="(max-width: 1024px) 100vw, 380px"
-              className="object-cover"
+              className="object-contain"
             />
           </div>
         </div>
 
         <div>
           <h2 className="section-title">{site.expert.name}</h2>
-          <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+          <div className="mt-7 grid grid-cols-2 gap-3">
             {site.expert.facts.map((f) => (
-              <div key={f.label} className="bg-surface px-5 py-5">
-                <div className="text-[24px] font-extrabold leading-none sm:text-[28px]">
+              <div key={f.label} className="card px-5 py-5">
+                <div className="text-[24px] font-extrabold leading-none text-ink sm:text-[28px]">
                   {f.value}
                 </div>
                 <div className="mt-2 text-[13px] leading-snug text-muted">{f.label}</div>
@@ -285,8 +292,11 @@ export function Offer({ onRegister }) {
           <h2 className="section-title">{site.takeaways.title}</h2>
           <ul className="mt-8 divide-y divide-line border-y border-line">
             {site.takeaways.items.map((i) => (
-              <li key={i} className="flex gap-3.5 py-4 text-[16px] leading-relaxed">
-                <span className="mt-0.5 shrink-0 text-violet" aria-hidden="true">
+              <li key={i} className="flex gap-3.5 py-4 text-[16px] leading-relaxed text-ink">
+                <span
+                  aria-hidden="true"
+                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime text-[12px] font-extrabold text-ink"
+                >
                   ✓
                 </span>
                 <span>{i}</span>
@@ -295,14 +305,14 @@ export function Offer({ onRegister }) {
           </ul>
         </div>
 
-        <div className="card overflow-hidden self-start">
+        <div className="card-dark overflow-hidden self-start">
           <div className="p-7">
-            <div className="text-[13px] text-muted">Ishtirok narxi</div>
+            <div className="text-[13px] text-paper/60">Ishtirok narxi</div>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-[44px] font-extrabold leading-none tracking-tight sm:text-[52px]">
+              <span className="text-[44px] font-extrabold leading-none tracking-tight text-lime sm:text-[52px]">
                 {e.price}
               </span>
-              <span className="text-[18px] font-bold text-muted">{e.currency}</span>
+              <span className="text-[18px] font-bold text-paper/70">{e.currency}</span>
             </div>
 
             <dl className="mt-7 space-y-3 text-[15px]">
@@ -312,18 +322,18 @@ export function Offer({ onRegister }) {
                 ["Manzil", `${e.venue}, ${e.city}`],
                 ["Format", "Offline"],
               ].map(([k, v]) => (
-                <div key={k} className="flex justify-between gap-4 border-b border-line pb-3">
-                  <dt className="text-muted">{k}</dt>
-                  <dd className="text-right font-bold">{v}</dd>
+                <div key={k} className="flex justify-between gap-4 border-b border-paper/10 pb-3">
+                  <dt className="text-paper/55">{k}</dt>
+                  <dd className="text-right font-bold text-paper">{v}</dd>
                 </div>
               ))}
             </dl>
 
-            <div className="mt-6 rounded-xl border border-amber/40 bg-amber/10 px-4 py-3 text-[14px] font-bold text-amber">
+            <div className="mt-6 inline-flex rounded-full bg-lime px-4 py-2 text-[13px] font-extrabold text-ink">
               Joy soni cheklangan — atigi {e.seatsTotal} ta
             </div>
 
-            <button type="button" onClick={onRegister} className="btn-primary mt-6 w-full">
+            <button type="button" onClick={onRegister} className="btn-invert mt-6 w-full">
               {site.hero.cta}
             </button>
           </div>
@@ -352,11 +362,11 @@ export function Faq() {
                   aria-expanded={isOpen}
                   className="flex w-full items-start justify-between gap-6 py-5 text-left"
                 >
-                  <span className="text-[16px] font-bold leading-snug sm:text-[18px]">{f.q}</span>
+                  <span className="text-[16px] font-bold leading-snug text-ink sm:text-[18px]">{f.q}</span>
                   <span
                     aria-hidden="true"
                     className={
-                      "mt-0.5 shrink-0 text-[22px] leading-none text-violet transition-transform duration-200 " +
+                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lime text-[18px] leading-none text-ink transition-transform duration-200 " +
                       (isOpen ? "rotate-45" : "")
                     }
                   >
@@ -381,24 +391,26 @@ export function Faq() {
 
 export function FinalCta({ onRegister }) {
   return (
-    <section className="glow-top py-16 sm:py-24">
-      <div className="wrap max-w-[760px] text-center">
-        <h2 className="section-title">Keyingisi — sizning biznesingiz</h2>
-        <p className="mx-auto mt-5 max-w-[48ch] text-[16px] leading-relaxed text-muted sm:text-[18px]">
-          {e.dateLabel}, {e.time}, {e.venue}. {e.duration} ichida biznesingizda AI-xodimlar
-          qanday ishga tushishini o'z ko'zingiz bilan ko'rasiz.
-        </p>
-        <div className="mx-auto mt-9 max-w-[420px]">
-          <Countdown target={e.startsAt} />
+    <section className="py-14 sm:py-20">
+      <div className="wrap">
+        <div className="rounded-3xl bg-panel px-6 py-14 text-center sm:px-10 sm:py-20">
+          <h2 className="section-title">Keyingisi — sizning biznesingiz</h2>
+          <p className="mx-auto mt-5 max-w-[48ch] text-[16px] leading-relaxed text-muted sm:text-[18px]">
+            {e.dateLabel}, {e.time}, {e.venue}. {e.duration} ichida biznesingizda AI-xodimlar
+            qanday ishga tushishini o'z ko'zingiz bilan ko'rasiz.
+          </p>
+          <div className="mx-auto mt-9 max-w-[420px]">
+            <Countdown target={e.startsAt} />
+          </div>
+          <div className="mt-8">
+            <button type="button" onClick={onRegister} className="btn-primary">
+              {site.hero.cta}
+            </button>
+          </div>
+          <p className="mt-5 text-[14px] text-muted">
+            {e.price} {e.currency} · {e.seatsTotal} ta joy
+          </p>
         </div>
-        <div className="mt-8">
-          <button type="button" onClick={onRegister} className="btn-primary">
-            {site.hero.cta}
-          </button>
-        </div>
-        <p className="mt-5 text-[14px] text-muted">
-          {e.price} {e.currency} · {e.seatsTotal} ta joy
-        </p>
       </div>
     </section>
   );
@@ -410,13 +422,13 @@ export function Footer() {
   return (
     <footer className="border-t border-line py-9">
       <div className="wrap">
-        <p className="text-[14px] font-bold">
+        <p className="text-[14px] font-bold text-ink">
           © {new Date().getFullYear()} {site.footer.text}
         </p>
         <p className="mt-1.5 text-[13px] text-muted">
           {e.city}, {e.venue} · {e.dateLabel}, {e.time}
         </p>
-        <p className="mt-4 max-w-[70ch] text-[12px] leading-relaxed text-muted/60">
+        <p className="mt-4 max-w-[70ch] text-[12px] leading-relaxed text-muted/70">
           {site.footer.disclaimer}
         </p>
       </div>
@@ -439,10 +451,10 @@ export function StickyBar({ onRegister }) {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/95 px-4 py-3 backdrop-blur lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 px-4 py-3 backdrop-blur lg:hidden">
       <div className="flex items-center gap-3">
         <div className="min-w-0">
-          <div className="text-[15px] font-extrabold leading-none">
+          <div className="text-[15px] font-extrabold leading-none text-ink">
             {e.price} <span className="text-[12px] font-bold text-muted">{e.currency}</span>
           </div>
           <div className="mt-1 truncate text-[11px] text-muted">

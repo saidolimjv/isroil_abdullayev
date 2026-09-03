@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -12,8 +12,8 @@ html {
 }
 
 body {
-  background-color: #070b14;
-  color: #ffffff;
+  background-color: #fcfcf7;
+  color: #111110;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -32,7 +32,7 @@ body {
 
 /* Klaviatura bilan yurganda fokus ko'rinib tursin */
 :focus-visible {
-  outline: 2px solid #7c3aed;
+  outline: 2px solid #111110;
   outline-offset: 3px;
 }
 
@@ -42,28 +42,51 @@ body {
   }
 
   .section-title {
-    @apply text-[26px] leading-[1.15] font-extrabold tracking-tight sm:text-[38px];
+    @apply text-[26px] leading-[1.15] font-extrabold tracking-tight text-ink sm:text-[38px];
   }
 
+  /* Asosiy tugma — qora pill, referensdagi "Book a consultation" uslubi */
   .btn-primary {
-    @apply inline-flex w-full items-center justify-center rounded-2xl px-6 py-4
-           text-[15px] font-extrabold tracking-wide text-white
+    @apply inline-flex w-full items-center justify-center rounded-full bg-ink px-7 py-4
+           text-[15px] font-extrabold tracking-wide text-paper
+           transition-colors duration-150 active:scale-[0.985]
+           sm:w-auto sm:text-base;
+  }
+  .btn-primary:hover {
+    background-color: #cbff4d;
+    color: #111110;
+  }
+
+  /* Qorong'i kartalar ichida ishlatiladigan teskari tugma (limon fon) */
+  .btn-invert {
+    @apply inline-flex w-full items-center justify-center rounded-full bg-lime px-7 py-4
+           text-[15px] font-extrabold tracking-wide text-ink
            transition-transform duration-150 active:scale-[0.985]
            sm:w-auto sm:text-base;
-    background-image: linear-gradient(100deg, #ef4444 0%, #b91c1c 100%);
-    box-shadow: 0 10px 34px -12px rgba(239, 68, 68, 0.85);
+  }
+  .btn-invert:hover {
+    opacity: 0.88;
   }
 
+  /* Oq karta — nozik chegara bilan */
   .card {
-    @apply rounded-2xl border border-line bg-surface;
+    @apply rounded-3xl border border-line bg-paper;
+  }
+
+  /* Qora karta — referensdagi qora xizmat bloklariga o'xshash */
+  .card-dark {
+    @apply rounded-3xl bg-ink text-paper;
+  }
+
+  /* Kichik limon belgi/teg — sarlavha ustidagi label uchun */
+  .tag {
+    @apply inline-flex items-center rounded-lg bg-lime px-2.5 py-1 text-[13px] font-extrabold text-ink;
   }
 }
 
-/* Bosh sahifadagi yumshoq yorug'lik */
+/* Bosh sahifadagi yumshoq limon nur */
 .glow-top {
-  background:
-    radial-gradient(760px 420px at 78% -8%, rgba(124, 58, 237, 0.28), transparent 62%),
-    radial-gradient(620px 380px at 8% 4%, rgba(37, 99, 235, 0.22), transparent 60%);
+  background: radial-gradient(700px 420px at 50% -10%, rgba(203, 255, 77, 0.5), transparent 62%);
 }
 
 .overlay-enter {

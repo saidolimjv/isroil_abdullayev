@@ -111,14 +111,14 @@ export default function RegisterOverlay({ open, onClose }) {
   const firstName = name.trim().split(" ")[0] || "";
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-ink">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-paper">
       <div className="overlay-enter mx-auto flex min-h-full w-full max-w-[560px] flex-col px-5 pb-10 pt-4">
         <div className="flex justify-end">
           <button
             type="button"
             onClick={onClose}
             aria-label="Yopish"
-            className="rounded-full p-2 text-muted transition-colors hover:text-white"
+            className="rounded-full p-2 text-muted transition-colors hover:text-ink"
           >
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
@@ -133,7 +133,7 @@ export default function RegisterOverlay({ open, onClose }) {
 
         {step === "form" ? (
           <div className="flex flex-1 flex-col justify-center py-4">
-            <h2 className="text-[30px] font-extrabold leading-[1.1] tracking-tight sm:text-[36px]">
+            <h2 className="text-[30px] font-extrabold leading-[1.1] tracking-tight text-ink sm:text-[36px]">
               {t.title}
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-muted">{t.subtitle}</p>
@@ -150,7 +150,7 @@ export default function RegisterOverlay({ open, onClose }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.namePlaceholder}
-                className="w-full rounded-2xl border border-line bg-surface px-5 py-4 text-[17px] text-white placeholder:text-muted/60 focus:border-violet focus:outline-none"
+                className="w-full rounded-2xl border border-line bg-paper px-5 py-4 text-[17px] text-ink placeholder:text-muted/60 focus:border-ink focus:outline-none"
               />
             </div>
 
@@ -159,7 +159,7 @@ export default function RegisterOverlay({ open, onClose }) {
                 {t.phoneLabel}
               </label>
               <div className="flex gap-2">
-                <div className="flex shrink-0 items-center gap-1.5 rounded-2xl border border-line bg-surface px-4 text-[17px] font-bold">
+                <div className="flex shrink-0 items-center gap-1.5 rounded-2xl border border-line bg-paper px-4 text-[17px] font-bold text-ink">
                   <span aria-hidden="true">🇺🇿</span> +998
                 </div>
                 <input
@@ -170,7 +170,7 @@ export default function RegisterOverlay({ open, onClose }) {
                   value={phone}
                   onChange={(e) => setPhone(maskPhone(e.target.value))}
                   placeholder="XX XXX-XX-XX"
-                  className="w-full rounded-2xl border border-line bg-surface px-5 py-4 text-[17px] tracking-wide text-white placeholder:text-muted/60 focus:border-violet focus:outline-none"
+                  className="w-full rounded-2xl border border-line bg-paper px-5 py-4 text-[17px] tracking-wide text-ink placeholder:text-muted/60 focus:border-ink focus:outline-none"
                 />
               </div>
             </div>
@@ -192,8 +192,8 @@ export default function RegisterOverlay({ open, onClose }) {
                       className={
                         "rounded-2xl border px-5 py-4 text-left text-[16px] font-bold transition-colors " +
                         (active
-                          ? "border-violet bg-violet/15 text-white"
-                          : "border-line bg-surface text-muted hover:text-white")
+                          ? "border-ink bg-lime text-ink"
+                          : "border-line bg-paper text-muted hover:text-ink")
                       }
                     >
                       {o.label}
@@ -204,7 +204,7 @@ export default function RegisterOverlay({ open, onClose }) {
             </fieldset>
 
             {error ? (
-              <p role="alert" className="mt-4 text-sm font-semibold text-amber">
+              <p role="alert" className="mt-4 text-sm font-semibold text-ink">
                 {error}
               </p>
             ) : null}
@@ -220,7 +220,7 @@ export default function RegisterOverlay({ open, onClose }) {
 
             <p className="mt-4 text-center text-[13px] text-muted">
               {t.timerNote}{" "}
-              <span className="font-mono font-bold tabular-nums text-white">{mmss}</span>
+              <span className="font-mono font-bold tabular-nums text-ink">{mmss}</span>
             </p>
             <p className="mt-3 text-center text-[12px] leading-relaxed text-muted/70">
               {t.consent}
@@ -228,11 +228,11 @@ export default function RegisterOverlay({ open, onClose }) {
           </div>
         ) : (
           <div className="flex flex-1 flex-col justify-center py-6 text-center">
-            <div className="mx-auto flex h-[86px] w-[86px] items-center justify-center rounded-full bg-emerald-600">
+            <div className="mx-auto flex h-[86px] w-[86px] items-center justify-center rounded-full bg-lime">
               <svg width="42" height="42" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   d="M4 12.5l5.2 5.2L20 7"
-                  stroke="white"
+                  stroke="#111110"
                   strokeWidth="2.6"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -240,7 +240,7 @@ export default function RegisterOverlay({ open, onClose }) {
               </svg>
             </div>
 
-            <h2 className="mt-7 text-[28px] font-extrabold uppercase leading-[1.15] tracking-tight sm:text-[34px]">
+            <h2 className="mt-7 text-[28px] font-extrabold uppercase leading-[1.15] tracking-tight text-ink sm:text-[34px]">
               {firstName ? `${firstName}, ` : ""}
               {site.success.title}
             </h2>
@@ -248,7 +248,7 @@ export default function RegisterOverlay({ open, onClose }) {
               {site.success.text}
             </p>
 
-            <div className="mt-6 flex justify-center gap-4 text-2xl text-violet" aria-hidden="true">
+            <div className="mt-6 flex justify-center gap-4 text-2xl text-ink" aria-hidden="true">
               <span>↓</span>
               <span>↓</span>
               <span>↓</span>

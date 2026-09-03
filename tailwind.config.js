@@ -8,13 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ink: "#070B14",
-        surface: "#101728",
-        line: "#1E2942",
-        muted: "#8E9BB5",
-        blue: "#2563EB",
-        violet: "#7C3AED",
-        amber: "#F59E0B",
+        paper: "#FCFCF7",
+        ink: "#111110",
+        line: "#E6E3D8",
+        muted: "#6B6A62",
+        lime: "#CBFF4D",
+        limeDark: "#9FDA1E",
+        panel: "#F1EFE4",
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
