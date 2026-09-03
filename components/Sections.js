@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import site from "@/content/site";
 import Countdown from "./Countdown";
+import HeroTimer from "./HeroTimer";
 
 const e = site.event;
 
@@ -16,24 +17,20 @@ function TicketStrip() {
     { top: e.time, bottom: e.duration },
   ];
   return (
-    <div className="inline-flex w-full flex-wrap items-stretch overflow-hidden rounded-xl border border-line bg-surface/70 sm:w-auto">
+    <div className="flex w-full max-w-[520px] items-stretch overflow-hidden rounded-xl border border-line bg-surface/70">
       {cells.map((c, i) => (
         <div
           key={c.top}
-          className={
-            "flex-1 px-4 py-2.5 sm:flex-none sm:px-5 " +
-            (i > 0 ? "border-l border-line" : "")
-          }
+          className={"flex-1 px-2 py-2 sm:px-4 " + (i > 0 ? "border-l border-line" : "")}
         >
-          <div className="whitespace-nowrap text-[15px] font-extrabold leading-tight">
+          <div className="whitespace-nowrap text-[13px] font-extrabold leading-tight sm:text-[15px]">
             {c.top}
           </div>
-          <div className="mt-0.5 whitespace-nowrap text-[12px] text-muted">{c.bottom}</div>
+          <div className="mt-0.5 whitespace-nowrap text-[11px] text-muted sm:text-[12px]">
+            {c.bottom}
+          </div>
         </div>
       ))}
-      <div className="flex items-center border-line bg-violet/15 px-4 py-2.5 text-[12px] font-extrabold tracking-[0.14em] text-violet sm:border-l sm:px-5">
-        {e.format}
-      </div>
     </div>
   );
 }
@@ -42,65 +39,68 @@ function TicketStrip() {
 
 export function Hero({ onRegister }) {
   return (
-    <header className="glow-top relative border-b border-line pb-14 pt-7 sm:pb-20 sm:pt-10">
-      <div className="wrap">
+    <header className="glow-top relative flex min-h-[100svh] flex-col border-b border-line">
+      <div className="wrap flex flex-1 flex-col items-center justify-start gap-4 pb-5 pt-4 text-center sm:gap-6 sm:pb-8 sm:pt-7">
         <TicketStrip />
 
-        <div className="mt-9 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-14">
-          <div>
-            <h1 className="max-w-[15ch] text-[34px] font-extrabold leading-[1.06] tracking-[-0.02em] sm:text-[52px] lg:text-[58px]">
-              {site.hero.title}
-            </h1>
-            <p className="mt-6 max-w-[52ch] text-[16px] leading-relaxed text-muted sm:text-[18px]">
-              {site.hero.subtitle}
-            </p>
+        <h1 className="max-w-[18ch] text-[clamp(27px,7.4vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em]">
+          {site.hero.title}
+        </h1>
 
-            <ul className="mt-9 divide-y divide-line border-y border-line">
-              {site.hero.outcomes.map((o) => (
-                <li key={o.title} className="flex gap-4 py-4">
-                  <span
-                    aria-hidden="true"
-                    className="mt-2 h-2 w-2 shrink-0 rounded-full bg-violet"
-                  />
-                  <div>
-                    <div className="text-[17px] font-bold leading-snug">{o.title}</div>
-                    <div className="mt-1 text-[15px] leading-relaxed text-muted">{o.text}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+        <p className="max-w-[46ch] text-[clamp(14px,3.6vw,19px)] leading-snug text-muted">
+          {site.hero.subtitle}
+        </p>
 
-            <div className="mt-9 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
-              <button type="button" onClick={onRegister} className="btn-primary">
-                {site.hero.cta}
-              </button>
-              <Countdown target={e.startsAt} />
-            </div>
-          </div>
+        <div className="relative min-h-0 w-full flex-1">
+          <div
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet/25 blur-3xl"
+          />
+          <Image
+            src={site.expert.photo}
+            alt={site.expert.name}
+            fill
+            priority
+            sizes="(max-width: 640px) 92vw, 440px"
+            className="relative rounded-[28px] object-contain"
+          />
+        </div>
 
-          <div className="lg:pt-2">
-            <div className="card overflow-hidden">
-              <div className="relative aspect-square w-full bg-line">
-                <Image
-                  src={site.expert.photo}
-                  alt={site.expert.name}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 420px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="border-t border-line p-5">
-                <div className="text-[19px] font-extrabold">{site.expert.name}</div>
-                <p className="mt-2 text-[14px] leading-relaxed text-muted">
-                  {site.expert.bio[0]}
-                </p>
-              </div>
-            </div>
+        <div className="w-full max-w-[420px] shrink-0">
+          <button type="button" onClick={onRegister} className="btn-primary w-full">
+            {site.hero.cta}
+          </button>
+          <div className="mt-3">
+            <HeroTimer note={site.hero.timerNote} />
           </div>
         </div>
       </div>
     </header>
+  );
+}
+
+/* ------------------------------------ Outcomes ------------------------------------ */
+
+export function Outcomes() {
+  return (
+    <section className="border-b border-line py-14 sm:py-20">
+      <div className="wrap max-w-[860px]">
+        <h2 className="section-title">{site.outcomes.title}</h2>
+        <ul className="mt-8 divide-y divide-line border-y border-line">
+          {site.outcomes.items.map((o) => (
+            <li key={o.title} className="flex gap-4 py-5">
+              <span aria-hidden="true" className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-violet" />
+              <div>
+                <div className="text-[18px] font-bold leading-snug sm:text-[20px]">{o.title}</div>
+                <div className="mt-1.5 max-w-[62ch] text-[15px] leading-relaxed text-muted sm:text-[16px]">
+                  {o.text}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
 
@@ -427,6 +427,17 @@ export function Footer() {
 /* --------------------------- Mobil uchun pastki yopishqoq CTA ---------------------- */
 
 export function StickyBar({ onRegister }) {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.85);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!show) return null;
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/95 px-4 py-3 backdrop-blur lg:hidden">
       <div className="flex items-center gap-3">

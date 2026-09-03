@@ -22,7 +22,7 @@ export const site = {
 
   expert: {
     name: "Isroil Abdullayev",
-    photo: "/isroil.jpg",
+    photo: "/isroil-cutout.png",
     // Tekshiring: raqamlar aynan shundaymi?
     facts: [
       { value: "5 yil", label: "media sohasida" },
@@ -39,10 +39,17 @@ export const site = {
 
   // --- Hero ---
   hero: {
-    title: "Biznesingizni operatsiondan chiqarib, telefoningizdagi bitta ekrandan boshqaring",
+    title: "AI orqali biznesingizni boshqarishni o'rganing",
     subtitle:
-      "Isroil Abdullayev bilan 1 kunlik offline biznes-seminar. Nazariya emas — sizning biznesingiz uchun AI-xodimlar qanday yig'ilishini jonli ko'rasiz.",
-    outcomes: [
+      "4 soat ichida o'zingizga AI agentlar yasab, biznesingizni avtomatlashtiring",
+    cta: "SEMINARGA YOZILISH",
+    timerNote: "seminarga oldindan ro'yxatdan o'ting",
+  },
+
+  // --- Hero ostidagi natijalar bloki ---
+  outcomes: {
+    title: "Seminardan keyin nima o'zgaradi",
+    items: [
       {
         title: "Operatsiondan chiqasiz",
         text: "Kundalik rutinani AI-ga topshirib, biznesni strateg sifatida boshqarishni o'rganasiz.",
@@ -56,7 +63,6 @@ export const site = {
         text: "Barcha raqamlar va agentlar ishi telefoningizdagi bitta ekranda — qo'lda hisobotsiz.",
       },
     ],
-    cta: "SEMINARGA YOZILISH",
   },
 
   // --- Muammo bloki ---

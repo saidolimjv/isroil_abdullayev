@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import {
   Hero,
+  Outcomes,
   Pain,
   Program,
   Fit,
@@ -33,6 +34,7 @@ export default function Page() {
     <>
       <main className="pb-24 lg:pb-0">
         <Hero onRegister={openForm} />
+        <Outcomes />
         <Pain />
         <Program onRegister={openForm} />
         <Fit />
