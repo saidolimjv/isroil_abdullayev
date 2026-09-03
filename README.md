@@ -48,9 +48,9 @@ Almashtirish uchun shu nomdagi faylni ustiga yozing (kvadrat, kamida 800×800).
 
 1. **amoCRM** — `AMO_FORM_URL` + field nomlari orqali lid yaratadi
 2. **Telegram** — guruhga xabar yuboradi
-3. **Meta CAPI** — `Lead` eventini serverdan yuboradi
+3. **Meta CAPI** — `CompleteRegistration` eventini serverdan yuboradi
 
-Brauzerdagi `fbq('track','Lead')` va serverdagi CAPI **bir xil `event_id`** ishlatadi —
+Brauzerdagi `fbq('track','CompleteRegistration')` va serverdagi CAPI **bir xil `event_id`** ishlatadi —
 Meta ularni bitta konversiya deb hisoblaydi (dublikat bo'lmaydi).
 
 Uchtasi ham `Promise.allSettled` bilan yuboriladi: bittasi ishlamay qolsa ham
@@ -67,7 +67,7 @@ Agar amo formasi boshqa nom kutsa, `AMO_FIELD_NAME` / `AMO_FIELD_PHONE` ni o'zga
 Bosh sahifa
    └─ "SEMINARGA YOZILISH" → InitiateCheckout (Pixel)
         └─ To'liq ekran forma: ism + telefon + (kela olaman / onlayn)
-             └─ Lead (Pixel + CAPI) → amoCRM + Telegram bildirishnoma
+             └─ CompleteRegistration (Pixel + CAPI) → amoCRM + Telegram bildirishnoma
                   └─ Rahmat ekrani → Telegram kanalga o'tish
 ```
 
