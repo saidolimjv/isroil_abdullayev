@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import site from "@/content/site";
 
 const TELEGRAM_URL =
-  process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/isroilai";
+  process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/+Z8fi8cYQmjdmNjli";
 
 const HOLD_SECONDS = 120; // 2 daqiqa
 

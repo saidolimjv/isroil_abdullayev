@@ -22,7 +22,7 @@ export const site = {
 
   expert: {
     name: "Isroil Abdullayev",
-    photo: "/isroil-cutout.png",
+    photo: "/isroil.webp",
     // Tekshiring: raqamlar aynan shundaymi?
     facts: [
       { value: "5 yil", label: "media sohasida" },
@@ -51,7 +51,7 @@ export const site = {
     title: "Seminardan keyin nima o'zgaradi",
     items: [
       {
-        title: "Operatsiondan chiqasiz",
+        title: "\"Operatsionka\"dan chiqasiz",
         text: "Kundalik rutinani AI-ga topshirib, biznesni strateg sifatida boshqarishni o'rganasiz.",
       },
       {
@@ -144,7 +144,7 @@ export const site = {
   },
 
   objection: {
-    title: "\"Men texnikadan uzoqman\" deb qo'rqmang",
+    title: "\"Men sun'iy intellektni uncha tushunmayman\" deb qo'rqmang",
     text: "Bu yerda kod yozmaysiz va noutbuk olib kelish shart emas. Isroil har bir qadamni ekranda o'zi ko'rsatib beradi, siz oddiy til va tayyor shablonlar bilan ishlaysiz. Telegramdan foydalana olsangiz — bu yerda ham uddalaysiz.",
   },
 
@@ -196,7 +196,7 @@ export const site = {
     nameLabel: "Ismingiz",
     namePlaceholder: "Ismingiz",
     phoneLabel: "Telefon raqamingiz",
-    formatLabel: "Seminar Toshkent shahrida bo'lib o'tadi",
+    formatLabel: "Seminar Toshkent shahrida bo'lib o'tadi, kela olasizmi?",
     formatOffline: "Kela olaman",
     formatOnline: "Onlayn qatnashaman",
     submit: "DAVOM ETISH",
