@@ -38,73 +38,41 @@ export async function POST(req) {
     "";
 
   const results = await Promise.allSettled([
-    sendToAmo({ name, phone, format }),
-    sendToTelegram({ name, phone, format }),
+    sendToGoogleSheets({ name, phone, format, pageUrl }),
     sendToMeta({ name, phone, eventId, pageUrl, fbp, fbc, ua, ip }),
   ]);
 
   results.forEach((r, i) => {
     if (r.status === "rejected") {
-      console.error(["amo", "telegram", "meta"][i], r.reason?.message || r.reason);
+      console.error(["sheets", "meta"][i], r.reason?.message || r.reason);
     }
   });
 
   return Response.json({ ok: true, eventId });
 }
 
-/* ------------------------------------ amoCRM ------------------------------------- */
-// AMO_FORM_URL va field nomlarini eski loyihadagi qiymatlar bilan to'ldiring.
+/* -------------------------------- Google Sheets ----------------------------------- */
+// Google Apps Script Web App orqali. O'rnatish uchun README dagi "Google Sheets"
+// bo'limiga qarang — bitta link (GOOGLE_SHEETS_WEBHOOK_URL) kifoya, API key kerak emas.
 
-async function sendToAmo({ name, phone, format }) {
-  const url = process.env.AMO_FORM_URL;
+async function sendToGoogleSheets({ name, phone, format, pageUrl }) {
+  const url = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!url) return "skipped";
-
-  const data = new URLSearchParams();
-  data.append(process.env.AMO_FIELD_NAME || "fields[name]", name);
-  data.append(process.env.AMO_FIELD_PHONE || "fields[phone]", phone);
-  if (process.env.AMO_FIELD_FORMAT) {
-    data.append(process.env.AMO_FIELD_FORMAT, FORMAT_LABEL[format]);
-  }
-  if (process.env.AMO_FIELD_SOURCE) {
-    data.append(process.env.AMO_FIELD_SOURCE, "AI Biznes Seminar 12.09");
-  }
-  // Amo formasi talab qiladigan qo'shimcha yashirin maydonlar (bo'lsa):
-  // AMO_EXTRA="hash=xxx&form_id=123"
-  if (process.env.AMO_EXTRA) {
-    for (const [k, v] of new URLSearchParams(process.env.AMO_EXTRA)) data.append(k, v);
-  }
 
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: data.toString(),
-  });
-  if (!res.ok) throw new Error("amo " + res.status);
-  return "ok";
-}
-
-/* ----------------------------------- Telegram ------------------------------------ */
-
-async function sendToTelegram({ name, phone, format }) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) return "skipped";
-
-  const text = [
-    "🎯 Yangi lid — AI Biznes Seminar (12-sentabr)",
-    "",
-    `👤 Ism: ${name}`,
-    `📞 Telefon: ${phone}`,
-    `📍 Format: ${FORMAT_LABEL[format]}`,
-    `🕒 ${new Date().toLocaleString("uz-UZ", { timeZone: "Asia/Tashkent" })}`,
-  ].join("\n");
-
-  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
+    // redirect: "follow" — Apps Script /exec ko'pincha 302 bilan javob beradi
+    redirect: "follow",
+    body: JSON.stringify({
+      name,
+      phone,
+      format: FORMAT_LABEL[format],
+      pageUrl,
+      submittedAt: new Date().toLocaleString("uz-UZ", { timeZone: "Asia/Tashkent" }),
+    }),
   });
-  if (!res.ok) throw new Error("telegram " + res.status);
+  if (!res.ok) throw new Error("sheets " + res.status);
   return "ok";
 }
 

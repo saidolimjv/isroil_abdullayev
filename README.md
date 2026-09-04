@@ -39,27 +39,36 @@ Countdown `event.startsAt` dan oladi (Toshkent vaqti, `+05:00`).
 
 ## 4. Rasm
 
-`public/isroil.jpg` — hero va ekspert bloklarida ishlatiladi.
+`public/isroil.webp` — hero va ekspert bloklarida ishlatiladi.
 Almashtirish uchun shu nomdagi faylni ustiga yozing (kvadrat, kamida 800×800).
 
 ## 5. Integratsiyalar
 
-`app/api/lead/route.js` bitta so'rovda uchta ishni bajaradi:
+`app/api/lead/route.js` bitta so'rovda ikkita ishni bajaradi:
 
-1. **amoCRM** — `AMO_FORM_URL` + field nomlari orqali lid yaratadi
-2. **Telegram** — guruhga xabar yuboradi
-3. **Meta CAPI** — `CompleteRegistration` eventini serverdan yuboradi
+1. **Google Sheets** — `GOOGLE_SHEETS_WEBHOOK_URL` orqali jadvalga qator qo'shadi
+2. **Meta CAPI** — `CompleteRegistration` eventini serverdan yuboradi
 
 Brauzerdagi `fbq('track','CompleteRegistration')` va serverdagi CAPI **bir xil `event_id`** ishlatadi —
 Meta ularni bitta konversiya deb hisoblaydi (dublikat bo'lmaydi).
 
-Uchtasi ham `Promise.allSettled` bilan yuboriladi: bittasi ishlamay qolsa ham
+Ikkalasi ham `Promise.allSettled` bilan yuboriladi: bittasi ishlamay qolsa ham
 foydalanuvchi rahmat ekranini ko'radi va lid yo'qolmaydi.
 
-### amoCRM maydonlari
+### Google Sheets o'rnatish
 
-Eski loyihadagi (`isroil-sayt`) `.env` dan `AMO_FORM_URL` va field ID larni ko'chiring.
-Agar amo formasi boshqa nom kutsa, `AMO_FIELD_NAME` / `AMO_FIELD_PHONE` ni o'zgartiring.
+To'liq qadamlar — repo ildizidagi **`google-apps-script.js`** faylida yozilgan.
+Qisqacha:
+
+1. Google Sheet oching, birinchi qatorga sarlavha yozing: `Sana | Ism | Telefon | Format | Sahifa`
+2. Kengaytmalar → Apps Script → `google-apps-script.js` matnini joylashtiring
+3. Deploy → New deployment → Web app → Execute as: Me, Access: Anyone
+4. Chiqqan URL'ni (oxiri `/exec`) `GOOGLE_SHEETS_WEBHOOK_URL` sifatida Vercel'ga qo'shing
+
+### Telegram kanal tugmasi
+
+`NEXT_PUBLIC_TELEGRAM_URL` — bu lidlarni yig'ish bilan bog'liq emas, shunchaki
+rahmat ekranidagi "TELEGRAMGA O'TISH" tugmasi qaysi kanalga olib borishini belgilaydi.
 
 ## 6. Voronka
 
@@ -67,9 +76,13 @@ Agar amo formasi boshqa nom kutsa, `AMO_FIELD_NAME` / `AMO_FIELD_PHONE` ni o'zga
 Bosh sahifa
    └─ "SEMINARGA YOZILISH" → InitiateCheckout (Pixel)
         └─ To'liq ekran forma: ism + telefon + (kela olaman / onlayn)
-             └─ CompleteRegistration (Pixel + CAPI) → amoCRM + Telegram bildirishnoma
+             └─ CompleteRegistration (Pixel + CAPI) → Google Sheets
                   └─ Rahmat ekrani → Telegram kanalga o'tish
 ```
 
 Formada 2 daqiqalik taymer ishlaydi (joy band qilinganini bildiradi).
 Nolga tushganda hech narsa o'zgarmaydi — shunchaki to'xtaydi.
+
+Forma tugmasi ("Davom etish") ism, telefon va format — uchtasi ham to'liq
+kiritilmaguncha bosilmaydi, shunday qilib `CompleteRegistration` eventi
+faqat to'liq ma'lumot bilan yuboriladi.
