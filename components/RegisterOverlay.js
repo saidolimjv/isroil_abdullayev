@@ -112,7 +112,7 @@ export default function RegisterOverlay({ open, onClose }) {
   const firstName = name.trim().split(" ")[0] || "";
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-paper">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-bg">
       <div className="overlay-enter mx-auto flex min-h-full w-full max-w-[560px] flex-col px-5 pb-10 pt-4">
         <div className="flex justify-end">
           <button
@@ -151,7 +151,7 @@ export default function RegisterOverlay({ open, onClose }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.namePlaceholder}
-                className="w-full rounded-2xl border border-line bg-paper px-5 py-4 text-[17px] text-ink placeholder:text-muted/60 focus:border-ink focus:outline-none"
+                className="w-full rounded-2xl border border-line bg-surface px-5 py-4 text-[17px] text-ink placeholder:text-muted/60 focus:border-lime focus:outline-none"
               />
             </div>
 
@@ -160,7 +160,7 @@ export default function RegisterOverlay({ open, onClose }) {
                 {t.phoneLabel}
               </label>
               <div className="flex gap-2">
-                <div className="flex shrink-0 items-center gap-1.5 rounded-2xl border border-line bg-paper px-4 text-[17px] font-bold text-ink">
+                <div className="flex shrink-0 items-center gap-1.5 rounded-2xl border border-line bg-surface px-4 text-[17px] font-bold text-ink">
                   <span aria-hidden="true">🇺🇿</span> +998
                 </div>
                 <input
@@ -171,7 +171,7 @@ export default function RegisterOverlay({ open, onClose }) {
                   value={phone}
                   onChange={(e) => setPhone(maskPhone(e.target.value))}
                   placeholder="XX XXX-XX-XX"
-                  className="w-full rounded-2xl border border-line bg-paper px-5 py-4 text-[17px] tracking-wide text-ink placeholder:text-muted/60 focus:border-ink focus:outline-none"
+                  className="w-full rounded-2xl border border-line bg-surface px-5 py-4 text-[17px] tracking-wide text-ink placeholder:text-muted/60 focus:border-lime focus:outline-none"
                 />
               </div>
             </div>
@@ -193,8 +193,8 @@ export default function RegisterOverlay({ open, onClose }) {
                       className={
                         "rounded-2xl border px-5 py-4 text-left text-[16px] font-bold transition-colors " +
                         (active
-                          ? "border-ink bg-lime text-ink"
-                          : "border-line bg-paper text-muted hover:text-ink")
+                          ? "border-lime bg-lime text-limeInk"
+                          : "border-line bg-surface text-muted hover:text-ink")
                       }
                     >
                       {o.label}
@@ -214,7 +214,7 @@ export default function RegisterOverlay({ open, onClose }) {
               type="button"
               onClick={submit}
               disabled={sending || !isComplete}
-              className="btn-primary mt-7 w-full disabled:cursor-not-allowed disabled:bg-ink/20 disabled:text-ink/40"
+              className="btn-primary mt-7 w-full disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/35"
             >
               {sending ? t.sending : t.submit}
             </button>
@@ -233,7 +233,7 @@ export default function RegisterOverlay({ open, onClose }) {
               <svg width="42" height="42" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   d="M4 12.5l5.2 5.2L20 7"
-                  stroke="#111110"
+                  stroke="#10130A"
                   strokeWidth="2.6"
                   strokeLinecap="round"
                   strokeLinejoin="round"

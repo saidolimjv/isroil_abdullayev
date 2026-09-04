@@ -46,7 +46,7 @@ export default function Countdown({ target, label = "Seminargacha qoldi" }) {
         {cells.map(([name, value]) => (
           <div
             key={name}
-            className="min-w-[64px] flex-1 rounded-xl border border-line bg-paper px-2 py-2.5 text-center sm:min-w-[76px]"
+            className="min-w-[64px] flex-1 rounded-xl border border-line bg-surface px-2 py-2.5 text-center sm:min-w-[76px]"
           >
             <div className="font-mono text-[26px] font-extrabold leading-none tabular-nums text-red-600 sm:text-[30px]">
               {ready ? String(value).padStart(2, "0") : "\u2013\u2013"}

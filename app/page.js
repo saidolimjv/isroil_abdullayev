@@ -1,19 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import {
-  Hero,
-  Outcomes,
-  Pain,
-  Program,
-  Fit,
-  Expert,
-  Offer,
-  Faq,
-  FinalCta,
-  Footer,
-  StickyBar,
-} from "@/components/Sections";
+import { Hero, Outcomes, Offer, Footer, StickyBar } from "@/components/Sections";
 import RegisterOverlay from "@/components/RegisterOverlay";
 
 export default function Page() {
@@ -35,13 +23,7 @@ export default function Page() {
       <main className="pb-24 lg:pb-0">
         <Hero onRegister={openForm} />
         <Outcomes />
-        <Pain />
-        <Program onRegister={openForm} />
-        <Fit />
-        <Expert />
         <Offer onRegister={openForm} />
-        <Faq />
-        <FinalCta onRegister={openForm} />
         <Footer />
       </main>
 
@@ -50,3 +32,4 @@ export default function Page() {
     </>
   );
 }
+

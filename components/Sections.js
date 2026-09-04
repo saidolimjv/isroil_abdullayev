@@ -17,7 +17,7 @@ function TicketStrip() {
     { top: e.time, bottom: e.duration },
   ];
   return (
-    <div className="flex w-full max-w-[520px] items-stretch overflow-hidden rounded-2xl border border-line bg-paper">
+    <div className="flex w-full max-w-[520px] items-stretch overflow-hidden rounded-2xl border border-line bg-surface">
       {cells.map((c, i) => (
         <div
           key={c.top}
@@ -55,7 +55,7 @@ export function Hero({ onRegister }) {
           <div className="relative aspect-square w-full max-w-[399px]">
             <div
               aria-hidden="true"
-              className="absolute left-1/2 top-1/2 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/45 blur-3xl"
+              className="absolute left-1/2 top-1/2 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/25 blur-3xl"
             />
             <Image
               src={site.expert.photo}
@@ -83,24 +83,42 @@ export function Hero({ onRegister }) {
 
 /* ------------------------------------ Outcomes ------------------------------------ */
 
+const OUTCOME_ICONS = [
+  // Chiqish/exit strelkasi — "Operatsionka"dan chiqasiz
+  <svg key="exit" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M10 16l4-4-4-4M14 12H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>,
+  // Soat — 24/7 AI-xodimlar
+  <svg key="clock" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+    <path d="M12 7v5l3.2 3.2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>,
+  // Panel/dashboard tur — Bitta dashboard
+  <svg key="grid" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3" y="3" width="7.5" height="7.5" rx="1.6" stroke="currentColor" strokeWidth="2" />
+    <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" stroke="currentColor" strokeWidth="2" />
+    <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" stroke="currentColor" strokeWidth="2" />
+    <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" stroke="currentColor" strokeWidth="2" />
+  </svg>,
+];
+
 export function Outcomes() {
   return (
     <section className="border-b border-line py-14 sm:py-20">
-      <div className="wrap max-w-[860px]">
+      <div className="wrap">
         <h2 className="section-title">{site.outcomes.title}</h2>
-        <ul className="mt-8 divide-y divide-line border-y border-line">
-          {site.outcomes.items.map((o) => (
-            <li key={o.title} className="flex gap-4 py-5">
-              <span aria-hidden="true" className="mt-2.5 h-2.5 w-2.5 shrink-0 rounded-full bg-lime ring-1 ring-ink/10" />
-              <div>
-                <div className="text-[18px] font-bold leading-snug text-ink sm:text-[20px]">{o.title}</div>
-                <div className="mt-1.5 max-w-[62ch] text-[15px] leading-relaxed text-muted sm:text-[16px]">
-                  {o.text}
-                </div>
+        <div className="mt-9 grid gap-4 sm:grid-cols-3">
+          {site.outcomes.items.map((o, i) => (
+            <div key={o.title} className="card p-6">
+              <div className="icon-badge">
+                <div className="h-5 w-5">{OUTCOME_ICONS[i]}</div>
               </div>
-            </li>
+              <div className="mt-5 text-[18px] font-bold leading-snug text-ink">{o.title}</div>
+              <div className="mt-2 text-[14px] leading-relaxed text-muted">{o.text}</div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
@@ -116,7 +134,7 @@ export function Pain() {
         <ul className="mt-8 space-y-4">
           {site.pain.items.map((item) => (
             <li key={item} className="flex gap-3.5 text-[16px] leading-relaxed sm:text-[17px]">
-              <span aria-hidden="true" className="mt-[9px] h-px w-5 shrink-0 bg-ink/30" />
+              <span aria-hidden="true" className="mt-[9px] h-px w-5 shrink-0 bg-ink/25" />
               <span className="text-muted">{item}</span>
             </li>
           ))}
@@ -152,7 +170,7 @@ export function Program({ onRegister }) {
                 <span
                   className={
                     "inline-flex rounded-lg px-2.5 py-1 font-mono text-[15px] font-extrabold tabular-nums " +
-                    (b.muted ? "bg-panel text-muted" : "bg-lime text-ink")
+                    (b.muted ? "bg-surface text-muted" : "bg-lime text-limeInk")
                   }
                 >
                   {b.time}
@@ -201,7 +219,7 @@ export function Fit() {
                 <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-ink sm:text-[16px]">
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime text-[12px] font-extrabold text-ink"
+                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime text-[12px] font-extrabold text-limeInk"
                   >
                     ✓
                   </span>
@@ -211,14 +229,14 @@ export function Fit() {
             </ul>
           </div>
           <div className="card-dark p-6 sm:p-7">
-            <h3 className="text-[18px] font-extrabold text-paper/70">{site.fit.no.title}</h3>
+            <h3 className="text-[18px] font-extrabold text-ink/70">{site.fit.no.title}</h3>
             <ul className="mt-5 space-y-4">
               {site.fit.no.items.map((i) => (
                 <li
                   key={i}
-                  className="flex gap-3 text-[15px] leading-relaxed text-paper/80 sm:text-[16px]"
+                  className="flex gap-3 text-[15px] leading-relaxed text-muted sm:text-[16px]"
                 >
-                  <span className="mt-0.5 shrink-0 text-paper/40" aria-hidden="true">
+                  <span className="mt-0.5 shrink-0 text-muted/60" aria-hidden="true">
                     ✕
                   </span>
                   <span>{i}</span>
@@ -228,11 +246,11 @@ export function Fit() {
           </div>
         </div>
 
-        <div className="card mt-4 border-lime bg-lime/15 p-6 sm:p-7">
+        <div className="card mt-4 border-lime/40 bg-lime/10 p-6 sm:p-7">
           <h3 className="text-[19px] font-extrabold leading-snug text-ink sm:text-[21px]">
             {site.objection.title}
           </h3>
-          <p className="mt-3 max-w-[68ch] text-[15px] leading-relaxed text-ink/70 sm:text-[16px]">
+          <p className="mt-3 max-w-[68ch] text-[15px] leading-relaxed text-muted sm:text-[16px]">
             {site.objection.text}
           </p>
         </div>
@@ -248,7 +266,7 @@ export function Expert() {
     <section className="border-b border-line py-14 sm:py-20">
       <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
         <div className="card overflow-hidden">
-          <div className="relative aspect-square w-full bg-panel">
+          <div className="relative aspect-square w-full bg-surface">
             <Image
               src={site.expert.photo}
               alt={site.expert.name}
@@ -297,7 +315,7 @@ export function Offer({ onRegister }) {
               <li key={i} className="flex gap-3.5 py-4 text-[16px] leading-relaxed text-ink">
                 <span
                   aria-hidden="true"
-                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime text-[12px] font-extrabold text-ink"
+                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime text-[12px] font-extrabold text-limeInk"
                 >
                   ✓
                 </span>
@@ -309,12 +327,12 @@ export function Offer({ onRegister }) {
 
         <div className="card-dark overflow-hidden self-start">
           <div className="p-7">
-            <div className="text-[13px] text-paper/60">Ishtirok narxi</div>
+            <div className="text-[13px] text-muted">Ishtirok narxi</div>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-[44px] font-extrabold leading-none tracking-tight text-lime sm:text-[52px]">
+              <span className="text-[44px] font-extrabold leading-none tracking-tight text-ink sm:text-[52px]">
                 {e.price}
               </span>
-              <span className="text-[18px] font-bold text-paper/70">{e.currency}</span>
+              <span className="text-[18px] font-bold text-muted">{e.currency}</span>
             </div>
 
             <dl className="mt-7 space-y-3 text-[15px]">
@@ -324,14 +342,14 @@ export function Offer({ onRegister }) {
                 ["Manzil", `${e.venue}, ${e.city}`],
                 ["Format", "Offline"],
               ].map(([k, v]) => (
-                <div key={k} className="flex justify-between gap-4 border-b border-paper/10 pb-3">
-                  <dt className="text-paper/55">{k}</dt>
-                  <dd className="text-right font-bold text-paper">{v}</dd>
+                <div key={k} className="flex justify-between gap-4 border-b border-line pb-3">
+                  <dt className="text-muted">{k}</dt>
+                  <dd className="text-right font-bold text-ink">{v}</dd>
                 </div>
               ))}
             </dl>
 
-            <div className="mt-6 inline-flex rounded-full bg-lime px-4 py-2 text-[13px] font-extrabold text-ink">
+            <div className="mt-6 inline-flex rounded-full bg-lime px-4 py-2 text-[13px] font-extrabold text-limeInk">
               Joy soni cheklangan — atigi {e.seatsTotal} ta
             </div>
 
@@ -368,7 +386,7 @@ export function Faq() {
                   <span
                     aria-hidden="true"
                     className={
-                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lime text-[18px] leading-none text-ink transition-transform duration-200 " +
+                      "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lime text-[18px] leading-none text-limeInk transition-transform duration-200 " +
                       (isOpen ? "rotate-45" : "")
                     }
                   >
@@ -395,7 +413,7 @@ export function FinalCta({ onRegister }) {
   return (
     <section className="py-14 sm:py-20">
       <div className="wrap">
-        <div className="rounded-3xl bg-panel px-6 py-14 text-center sm:px-10 sm:py-20">
+        <div className="rounded-3xl border border-line bg-surface px-6 py-14 text-center sm:px-10 sm:py-20">
           <h2 className="section-title">Keyingisi — sizning biznesingiz</h2>
           <p className="mx-auto mt-5 max-w-[48ch] text-[16px] leading-relaxed text-muted sm:text-[18px]">
             {e.dateLabel}, {e.time}, {e.venue}. {e.duration} ichida biznesingizda AI-xodimlar
@@ -453,7 +471,7 @@ export function StickyBar({ onRegister }) {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 px-4 py-3 backdrop-blur lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bg/95 px-4 py-3 backdrop-blur lg:hidden">
       <div className="flex items-center gap-3">
         <div className="min-w-0">
           <div className="text-[15px] font-extrabold leading-none text-ink">

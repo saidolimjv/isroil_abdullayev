@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html {
@@ -12,8 +12,8 @@ html {
 }
 
 body {
-  background-color: #fcfcf7;
-  color: #111110;
+  background-color: #0a0b09;
+  color: #f3f5ec;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -32,7 +32,7 @@ body {
 
 /* Klaviatura bilan yurganda fokus ko'rinib tursin */
 :focus-visible {
-  outline: 2px solid #111110;
+  outline: 2px solid #cbff4d;
   outline-offset: 3px;
 }
 
@@ -45,58 +45,45 @@ body {
     @apply text-[26px] leading-[1.15] font-extrabold tracking-tight text-ink sm:text-[38px];
   }
 
-  /* "Davom etish" / "Telegramga o'tish" — qizil */
-  .btn-primary {
-    @apply inline-flex w-full items-center justify-center rounded-full bg-red-600 px-7 py-4
-           text-[15px] font-extrabold tracking-wide text-white
-           transition-colors duration-150 active:scale-[0.985]
-           sm:w-auto sm:text-base;
-  }
-  .btn-primary:hover {
-    background-color: #b91c1c;
-  }
-
-  /* "Seminarga yozilish" — qizil, urg'u uchun */
-  .btn-cta {
-    @apply inline-flex w-full items-center justify-center rounded-full bg-red-600 px-7 py-4
-           text-[15px] font-extrabold tracking-wide text-white
-           transition-colors duration-150 active:scale-[0.985]
-           sm:w-auto sm:text-base;
-  }
-  .btn-cta:hover {
-    background-color: #b91c1c;
-  }
-
-  /* Qorong'i kartalar ichidagi "Seminarga yozilish" — bir xil qizil */
+  /* Barcha CTA tugmalar — bitta limon pill uslubi */
+  .btn-primary,
+  .btn-cta,
   .btn-invert {
-    @apply inline-flex w-full items-center justify-center rounded-full bg-red-600 px-7 py-4
-           text-[15px] font-extrabold tracking-wide text-white
+    @apply inline-flex w-full items-center justify-center rounded-full bg-lime px-7 py-4
+           text-[15px] font-extrabold tracking-wide text-limeInk
            transition-colors duration-150 active:scale-[0.985]
            sm:w-auto sm:text-base;
   }
+  .btn-primary:hover,
+  .btn-cta:hover,
   .btn-invert:hover {
-    background-color: #b91c1c;
+    background-color: #b8f228;
   }
 
-  /* Oq karta — nozik chegara bilan */
+  /* Oddiy karta — sahifa foniga nisbatan biroz ko'tarilgan qora sirt */
   .card {
-    @apply rounded-3xl border border-line bg-paper;
+    @apply rounded-3xl border border-line bg-surface;
   }
 
-  /* Qora karta — referensdagi qora xizmat bloklariga o'xshash */
+  /* Urg'u kartasi — limon chegara bilan ажratilgan */
   .card-dark {
-    @apply rounded-3xl bg-ink text-paper;
+    @apply rounded-3xl border border-lime/25 bg-surface2 text-ink;
   }
 
-  /* Kichik limon belgi/teg — sarlavha ustidagi label uchun */
+  /* Kichik limon belgi/teg */
   .tag {
-    @apply inline-flex items-center rounded-lg bg-lime px-2.5 py-1 text-[13px] font-extrabold text-ink;
+    @apply inline-flex items-center rounded-lg bg-lime px-2.5 py-1 text-[13px] font-extrabold text-limeInk;
+  }
+
+  /* Ikonka doirasi — referensdagi doira ichidagi belgi uslubi */
+  .icon-badge {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-lime text-limeInk;
   }
 }
 
 /* Bosh sahifadagi yumshoq limon nur */
 .glow-top {
-  background: radial-gradient(700px 420px at 50% -10%, rgba(203, 255, 77, 0.5), transparent 62%);
+  background: radial-gradient(700px 420px at 50% -10%, rgba(203, 255, 77, 0.22), transparent 62%);
 }
 
 .overlay-enter {
