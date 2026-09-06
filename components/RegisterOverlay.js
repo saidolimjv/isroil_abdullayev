@@ -97,7 +97,7 @@ export default function RegisterOverlay({ open, onClose }) {
         window.fbq(
           "track",
           "CompleteRegistration",
-          { content_name: "AI Biznes Seminar", value: 197000, currency: "UZS" },
+          { content_name: "AI Biznes Seminar", value: 297000, currency: "UZS" },
           data.eventId ? { eventID: data.eventId } : undefined
         );
       }

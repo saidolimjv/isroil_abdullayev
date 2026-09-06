@@ -6,17 +6,17 @@
 export const site = {
   // --- Asosiy ma'lumotlar ---
   event: {
-    dateLabel: "12-sentabr",
-    dayLabel: "Shanba",
+    dateLabel: "20-sentabr",
+    dayLabel: "Yakshanba",
     venue: "MFaktor",
     city: "Toshkent",
     time: "10:00 – 14:00",
     duration: "4 soat",
     format: "OFFLINE",
     // Countdown uchun (Toshkent vaqti = UTC+5)
-    startsAt: "2026-09-12T10:00:00+05:00",
-    seatsTotal: 80,
-    price: "197 000",
+    startsAt: "2026-09-20T10:00:00+05:00",
+    seatsTotal: 100,
+    price: "297 000",
     currency: "so'm",
   },
 
@@ -44,6 +44,23 @@ export const site = {
       "4 soat ichida o'zingizga AI agentlar yasab, biznesingizni avtomatlashtiring",
     cta: "SEMINARGA YOZILISH",
     timerNote: "seminarga oldindan ro'yxatdan o'ting",
+  },
+
+  // --- Boshqa reklama sarlavhalari uchun qo'shimcha "1-sahifa" variantlari ---
+  // /v2 va /v3 shu yerdan oladi. Qolgan hammasi (forma, rahmat ekrani,
+  // narx, dastur) BARCHA variantlarda bir xil — faqat shu matnlar farq qiladi.
+  // DIQQAT: bular DASTLABKI LOYIHA — o'zingizga mos tahrirlab qo'ying.
+  heroVariants: {
+    v2: {
+      title: "Haftasiga 20 soatingizni qaytarib oling",
+      subtitle:
+        "1 kunlik amaliy seminarda AI-xodimlar yasab, operatsion ishlardan butunlay chiqasiz",
+    },
+    v3: {
+      title: "Sotuvni 2 barobar oshiring, xarajatni kamaytiring",
+      subtitle:
+        "Isroil Abdullayev bilan 4 soatlik jonli amaliyotda o'z AI-xodimlaringizni quramiz",
+    },
   },
 
   // --- Hero ostidagi natijalar bloki ---
@@ -165,11 +182,11 @@ export const site = {
   faq: [
     {
       q: "Seminar qayerda va qachon bo'ladi?",
-      a: "12-sentabr, shanba kuni, Toshkent shahridagi MFaktor'da, soat 10:00 dan 14:00 gacha.",
+      a: "20-sentabr, yakshanba kuni, Toshkent shahridagi MFaktor'da, soat 10:00 dan 14:00 gacha.",
     },
     {
       q: "Narxi qancha?",
-      a: "Ishtirok narxi — 197 000 so'm. Narx o'zgarmaydi, lekin joy soni 80 ta bilan cheklangan.",
+      a: "Ishtirok narxi — 297 000 so'm. Narx o'zgarmaydi, lekin joy soni 100 ta bilan cheklangan.",
     },
     {
       q: "Noutbuk olib kelish kerakmi?",
@@ -227,9 +244,9 @@ export const site = {
   },
 
   meta: {
-    title: "AI Biznes Seminar — Isroil Abdullayev | 12-sentabr, Toshkent",
+    title: "AI Biznes Seminar — Isroil Abdullayev | 20-sentabr, Toshkent",
     description:
-      "1 kunlik offline seminar: operatsiondan chiqing, 24/7 AI-xodimlar qo'ying va biznesni bitta dashboarddan boshqaring. 12-sentabr, MFaktor, Toshkent.",
+      "1 kunlik offline seminar: operatsiondan chiqing, 24/7 AI-xodimlar qo'ying va biznesni bitta dashboarddan boshqaring. 20-sentabr, MFaktor, Toshkent.",
   },
 };
 

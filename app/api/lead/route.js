@@ -104,7 +104,7 @@ async function sendToMeta({ name, phone, eventId, pageUrl, fbp, fbc, ua, ip }) {
         user_data: userData,
         custom_data: {
           content_name: "AI Biznes Seminar",
-          value: 197000,
+          value: 297000,
           currency: "UZS",
         },
       },

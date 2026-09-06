@@ -37,18 +37,18 @@ function TicketStrip() {
 
 /* -------------------------------------- Hero -------------------------------------- */
 
-export function Hero({ onRegister }) {
+export function Hero({ onRegister, title, subtitle }) {
   return (
     <header className="glow-top relative flex min-h-[100svh] flex-col border-b border-line">
       <div className="wrap flex flex-1 flex-col items-center justify-start gap-4 pb-5 pt-4 text-center sm:gap-6 sm:pb-8 sm:pt-7">
         <TicketStrip />
 
         <h1 className="max-w-[18ch] text-[clamp(27px,7.4vw,52px)] font-extrabold leading-[1.08] tracking-[-0.02em] text-ink">
-          {site.hero.title}
+          {title || site.hero.title}
         </h1>
 
         <p className="max-w-[46ch] text-[clamp(14px,3.6vw,19px)] leading-snug text-muted">
-          {site.hero.subtitle}
+          {subtitle || site.hero.subtitle}
         </p>
 
         <div className="flex w-full flex-1 flex-col items-center justify-end">

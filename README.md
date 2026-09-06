@@ -1,4 +1,4 @@
-# AI Biznes Seminar — Isroil Abdullayev (12-sentabr, MFaktor)
+# AI Biznes Seminar — Isroil Abdullayev (20-sentabr, MFaktor)
 
 Next.js 14 + Tailwind. Bitta sahifa + 2 bosqichli ro'yxatdan o'tish (forma → Telegram).
 
@@ -70,7 +70,33 @@ Qisqacha:
 `NEXT_PUBLIC_TELEGRAM_URL` — bu lidlarni yig'ish bilan bog'liq emas, shunchaki
 rahmat ekranidagi "TELEGRAMGA O'TISH" tugmasi qaysi kanalga olib borishini belgilaydi.
 
-## 6. Voronka
+## 6. Bir nechta reklama sarlavhasi (landing variantlari)
+
+Sayt bir nechta "1-sahifa" variantini qo'llab-quvvatlaydi — har biri
+boshqa **headline/subheadline** bilan, lekin **forma va rahmat ekrani
+hammasida bir xil** (`components/PageShell.js` orqali umumiy):
+
+| URL | Headline manbai |
+|---|---|
+| `/` | `content/site.js` → `hero.title` / `hero.subtitle` |
+| `/v2` | `content/site.js` → `heroVariants.v2` |
+| `/v3` | `content/site.js` → `heroVariants.v3` |
+
+**Yangi variant qo'shish** (masalan `/v4`):
+
+1. `content/site.js` dagi `heroVariants` ichiga `v4: { title: "...", subtitle: "..." }` qo'shing
+2. `app/v4/page.js` yarating, `app/v2/page.js` dan nusxa oling, `site.heroVariants.v4` ga o'zgartiring
+
+Reklama kampaniyalarida har bir sarlavhani alohida URL'ga yo'naltirasiz
+(masalan Meta Ads'da bitta kampaniyaning turli reklama to'plamlari —
+har biri boshqa `/v...` manziliga). Qaysi variant ko'proq ro'yxatdan
+o'tish (`CompleteRegistration`) keltirganini Meta Ads Manager'da
+URL bo'yicha solishtirib ko'rish mumkin.
+
+> `heroVariants.v2` va `v3` dagi matnlar — **dastlabki loyiha**, o'zingizga
+> mos tahrirlab qo'ying.
+
+## 7. Voronka
 
 ```
 Bosh sahifa
