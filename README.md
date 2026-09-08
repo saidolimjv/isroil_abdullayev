@@ -1,6 +1,9 @@
-# AI Biznes Seminar — Isroil Abdullayev (20-sentabr, MFaktor)
+# AI Biznes Seminar — Isroil Abdullayev (20-sentabr, MFaktor, Toshkent)
 
-Next.js 14 + Tailwind. Bitta sahifa + 2 bosqichli ro'yxatdan o'tish (forma → Telegram).
+Next.js 14 + Tailwind. Conversion-focused landing + 2 bosqichli lead forma.
+
+**Seminar parametrlari (final):** 20-sentabr • 10:00–13:00 • 3 soat • Offline •
+MFaktor, Toshkent • 200 000 so'm • maksimal 100 ta joy.
 
 ## 1. Lokal ishga tushirish
 
@@ -13,102 +16,97 @@ npm run dev                  # http://localhost:3000
 ## 2. GitHub → Vercel
 
 ```bash
-git init
 git add .
-git commit -m "AI seminar landing"
-git branch -M main
-git remote add origin https://github.com/USERNAME/isroil-seminar.git
-git push -u origin main
+git commit -m "CRO redesign"
+git push
 ```
 
-Vercel'da: **Add New → Project → repo'ni tanlang**
+Vercel'da: **Framework Preset: Next.js**, Root Directory `./`,
+`.env.example` dagi kalitlarni Environment Variables ga qo'shing → **Redeploy**.
 
-- **Framework Preset:** Next.js (qo'lda tekshiring)
-- **Root Directory:** `./` (agar repo ichida papka bo'lsa — `isroil-seminar`)
-- **Environment Variables:** `.env.example` dagi barcha kalitlarni qo'shing
-- Deploy
-
-> Env o'zgaruvchini qo'shgandan keyin **Redeploy** qilish shart, aks holda yangi qiymat olinmaydi.
+> Env qo'shgandan keyin Redeploy shart, aks holda yangi qiymat olinmaydi.
 
 ## 3. Matnni o'zgartirish
 
-Barcha matn — **`content/site.js`**. Kodga tegmasdan tahrirlash mumkin:
-sana, manzil, narx, joy soni, dastur, FAQ, forma va rahmat ekrani.
+Barcha matn — **`content/site.js`**. Kodga tegmasdan tahrirlanadi:
+sana, narx, joy soni, sarlavhalar, kartalar, dastur, FAQ, forma.
 
-Countdown `event.startsAt` dan oladi (Toshkent vaqti, `+05:00`).
+## 4. Landing strukturasi
 
-## 4. Rasm
+Hero → Kim uchun → 3 transformatsiya → 3 soatda nima qilamiz (7 qadam) →
+Sendly proof → Ekspert → Nima olib ketasiz → FAQ → Narx bloki → Footer.
 
-`public/isroil.webp` — hero va ekspert bloklarida ishlatiladi.
-Almashtirish uchun shu nomdagi faylni ustiga yozing (kvadrat, kamida 800×800).
+## 5. A/B test (hero sarlavhasi)
 
-## 5. Integratsiyalar
+| URL | Variant | Manba |
+|---|---|---|
+| `/` | TEST A (default) | `headlineTests.A` |
+| `/v2` | TEST B | `headlineTests.B` |
+| `/v3` | TEST C | `headlineTests.C` |
+
+Uchalasi bitta `components/PageShell.js` dan foydalanadi — forma, bo'limlar,
+backend bir xil. Faqat hero sarlavhasi farq qiladi.
+
+## 6. Auditoriya personalizatsiyasi (message match)
+
+URL query param orqali hero sarlavha/subtitle almashadi:
+
+- `?audience=owner` — tadbirkor / biznes egasi
+- `?audience=manager` — top-menejer / bo'lim rahbari
+- `?audience=sales` — sotuv bo'limi rahbari
+- parametr yo'q yoki `general` — default sarlavha
+
+Matnlar `content/site.js` → `audiences` ichida.
+Reklama to'plamlarini shu parametrlar bilan yo'naltirsangiz, e'lon va
+landing sarlavhasi bir-biriga mos keladi (message match).
+
+**Ustuvorlik:** `audience` > A/B variant > default.
+
+## 7. Rasm
+
+`public/isroil.webp` — hero va ekspert bloklarida. Almashtirish uchun shu
+nomdagi faylni ustiga yozing (kvadrat, fon shaffof, kamida 800×800).
+
+## 8. Integratsiyalar
 
 `app/api/lead/route.js` bitta so'rovda ikkita ishni bajaradi:
 
 1. **Google Sheets** — `GOOGLE_SHEETS_WEBHOOK_URL` orqali jadvalga qator qo'shadi
+   (sana, ism, telefon, sahifa, utm_source/medium/campaign/content/term, audience)
 2. **Meta CAPI** — `CompleteRegistration` eventini serverdan yuboradi
 
-Brauzerdagi `fbq('track','CompleteRegistration')` va serverdagi CAPI **bir xil `event_id`** ishlatadi —
-Meta ularni bitta konversiya deb hisoblaydi (dublikat bo'lmaydi).
+Brauzerdagi `fbq('track','CompleteRegistration')` va serverdagi CAPI
+**bir xil `event_id`** ishlatadi — Meta ularni bitta konversiya deb hisoblaydi.
 
-Ikkalasi ham `Promise.allSettled` bilan yuboriladi: bittasi ishlamay qolsa ham
+Ikkalasi `Promise.allSettled` bilan yuboriladi: bittasi ishlamay qolsa ham
 foydalanuvchi rahmat ekranini ko'radi va lid yo'qolmaydi.
 
 ### Google Sheets o'rnatish
+Qadamlar `google-apps-script.js` faylida. Jadval sarlavhalari:
+`Sana | Ism | Telefon | Sahifa | utm_source | utm_medium | utm_campaign | utm_content | utm_term | audience`
 
-To'liq qadamlar — repo ildizidagi **`google-apps-script.js`** faylida yozilgan.
-Qisqacha:
+## 9. Tracking
 
-1. Google Sheet oching, birinchi qatorga sarlavha yozing: `Sana | Ism | Telefon | Format | Sahifa`
-2. Kengaytmalar → Apps Script → `google-apps-script.js` matnini joylashtiring
-3. Deploy → New deployment → Web app → Execute as: Me, Access: Anyone
-4. Chiqqan URL'ni (oxiri `/exec`) `GOOGLE_SHEETS_WEBHOOK_URL` sifatida Vercel'ga qo'shing
+`lib/analytics.js` — bitta helper. Meta'ga `trackCustom`, GA4 bo'lsa `gtag('event')`:
 
-### Telegram kanal tugmasi
+`hero_cta_click` · `mid_cta_click` · `sticky_cta_click` · `final_cta_click` ·
+`form_open` · `form_submit` · `lead_success`
 
-`NEXT_PUBLIC_TELEGRAM_URL` — bu lidlarni yig'ish bilan bog'liq emas, shunchaki
-rahmat ekranidagi "TELEGRAMGA O'TISH" tugmasi qaysi kanalga olib borishini belgilaydi.
+**MUHIM:** standart Meta konversiyasi (`CompleteRegistration`) FAQAT
+muvaffaqiyatli lead yuborilgandan keyin fire bo'ladi. CTA bosilganda emas.
 
-## 6. Bir nechta reklama sarlavhasi (landing variantlari)
+UTM va `audience` sessiyaga saqlanadi (birinchi tegib o'tgan manba saqlanadi)
+va lead bilan birga backendga yuboriladi.
 
-Sayt bir nechta "1-sahifa" variantini qo'llab-quvvatlaydi — har biri
-boshqa **headline/subheadline** bilan, lekin **forma va rahmat ekrani
-hammasida bir xil** (`components/PageShell.js` orqali umumiy):
-
-| URL | Headline manbai |
-|---|---|
-| `/` | `content/site.js` → `hero.title` / `hero.subtitle` |
-| `/v2` | `content/site.js` → `heroVariants.v2` |
-| `/v3` | `content/site.js` → `heroVariants.v3` |
-
-**Yangi variant qo'shish** (masalan `/v4`):
-
-1. `content/site.js` dagi `heroVariants` ichiga `v4: { title: "...", subtitle: "..." }` qo'shing
-2. `app/v4/page.js` yarating, `app/v2/page.js` dan nusxa oling, `site.heroVariants.v4` ga o'zgartiring
-
-Reklama kampaniyalarida har bir sarlavhani alohida URL'ga yo'naltirasiz
-(masalan Meta Ads'da bitta kampaniyaning turli reklama to'plamlari —
-har biri boshqa `/v...` manziliga). Qaysi variant ko'proq ro'yxatdan
-o'tish (`CompleteRegistration`) keltirganini Meta Ads Manager'da
-URL bo'yicha solishtirib ko'rish mumkin.
-
-> `heroVariants.v2` va `v3` dagi matnlar — **dastlabki loyiha**, o'zingizga
-> mos tahrirlab qo'ying.
-
-## 7. Voronka
+## 10. Voronka
 
 ```
-Bosh sahifa
-   └─ "SEMINARGA YOZILISH" → InitiateCheckout (Pixel)
-        └─ To'liq ekran forma: ism + telefon + (kela olaman / onlayn)
-             └─ CompleteRegistration (Pixel + CAPI) → Google Sheets
-                  └─ Rahmat ekrani → Telegram kanalga o'tish
+Landing → CTA (hero / mid / sticky / final)
+   └─ form_open → to'liq ekran forma: ism + telefon
+        └─ form_submit → /api/lead
+             └─ Google Sheets + Meta CAPI
+                  └─ lead_success → rahmat ekrani → Telegram kanal
 ```
 
-Formada 2 daqiqalik taymer ishlaydi (joy band qilinganini bildiradi).
-Nolga tushganda hech narsa o'zgarmaydi — shunchaki to'xtaydi.
-
-Forma tugmasi ("Davom etish") ism, telefon va format — uchtasi ham to'liq
-kiritilmaguncha bosilmaydi, shunday qilib `CompleteRegistration` eventi
-faqat to'liq ma'lumot bilan yuboriladi.
+Forma tugmasi ism va telefon to'liq kiritilmaguncha bosilmaydi —
+`CompleteRegistration` faqat to'liq ma'lumot bilan yuboriladi.

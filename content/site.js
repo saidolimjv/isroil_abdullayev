@@ -4,237 +4,315 @@
 // ============================================================
 
 export const site = {
-  // --- Asosiy ma'lumotlar ---
+  // --- Seminar parametrlari (FINAL) ---
   event: {
     dateLabel: "20-sentabr",
     dayLabel: "Yakshanba",
     venue: "MFaktor",
     city: "Toshkent",
-    time: "10:00 – 14:00",
-    duration: "4 soat",
-    format: "OFFLINE",
-    // Countdown uchun (Toshkent vaqti = UTC+5)
-    startsAt: "2026-09-20T10:00:00+05:00",
+    time: "10:00–13:00",
+    duration: "3 soat",
+    format: "Offline",
     seatsTotal: 100,
-    price: "297 000",
+    price: "200 000",
     currency: "so'm",
   },
 
-  expert: {
-    name: "Isroil Abdullayev",
-    photo: "/isroil.webp",
-    // Tekshiring: raqamlar aynan shundaymi?
-    facts: [
-      { value: "5 yil", label: "media sohasida" },
-      { value: "3 yil", label: "sun'iy intellekt sohasida" },
-      { value: "200+", label: "o'quvchi AI bo'yicha dars oldi" },
-      { value: "30+", label: "biznes egasi — Milliard klubida" },
-    ],
-    bio: [
-      "5 yildan beri media sohasida, 3 yildan beri sun'iy intellekt bilan ishlayman.",
-      "Hozirda million dollarlik startapning jamoasini AI-agentlar bilan qurib kelyapman — treksh 1000$ dan oshdi.",
-      "200 dan ortiq insonga, shu jumladan Milliard klubidagi 30 dan ortiq biznes egasiga sun'iy intellekt bo'yicha dars berganman.",
-    ],
+  // --- CTA matnlari ---
+  cta: {
+    hero: "100 TA JOYDAN BIRINI BAND QILAMAN",
+    mid: "SEMINARGA JOYIMNI BAND QILAMAN",
+    sticky: "JOYIMNI BAND QILAMAN",
+    final: "JOYIMNI BAND QILAMAN",
   },
 
   // --- Hero ---
   hero: {
-    title: "AI orqali biznesingizni boshqarishni o'rganing",
+    preheadline: "Tadbirkorlar va rahbarlar uchun 3 soatlik amaliy AI seminar",
+    title: "3 soatda biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni boshlang",
     subtitle:
-      "4 soat ichida o'zingizga AI agentlar yasab, biznesingizni avtomatlashtiring",
-    cta: "SEMINARGA YOZILISH",
-    timerNote: "seminarga oldindan ro'yxatdan o'ting",
+      "Qaytariladigan ishlarni AI'ga topshirish, biznes va sotuv jarayonlarini avtomatlashtirish hamda asosiy raqamlarni bitta dashboarddan nazorat qilishni Isroil Abdullayev bilan amalda o'rganing.",
+    microcopy: "Offline format • Joylar soni cheklangan",
+    trustLine: "Dasturchi bo'lish shart emas",
+    scarcity: "OFFLINE FORMAT • ATIGI 100 TA JOY",
   },
 
-  // --- Boshqa reklama sarlavhalari uchun qo'shimcha "1-sahifa" variantlari ---
-  // /v2 va /v3 shu yerdan oladi. Qolgan hammasi (forma, rahmat ekrani,
-  // narx, dastur) BARCHA variantlarda bir xil — faqat shu matnlar farq qiladi.
-  // DIQQAT: bular DASTLABKI LOYIHA — o'zingizga mos tahrirlab qo'ying.
-  heroVariants: {
-    v2: {
-      title: "Haftasiga 20 soatingizni qaytarib oling",
-      subtitle:
-        "1 kunlik amaliy seminarda AI-xodimlar yasab, operatsion ishlardan butunlay chiqasiz",
+  // --- A/B test sarlavhalari (/, /v2, /v3) ---
+  headlineTests: {
+    A: {
+      title: "3 soatda biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni boshlang",
     },
-    v3: {
-      title: "Sotuvni 2 barobar oshiring, xarajatni kamaytiring",
-      subtitle:
-        "Isroil Abdullayev bilan 4 soatlik jonli amaliyotda o'z AI-xodimlaringizni quramiz",
+    B: {
+      title: "3 soatda AI orqali biznesingizni boshqarishni yengillashtiring",
+    },
+    C: {
+      title: "3 soatda biznesingizdagi qaytariladigan ishlarni AI'ga topshirishni boshlang",
     },
   },
 
-  // --- Hero ostidagi natijalar bloki ---
+  // --- Auditoriya bo'yicha personalizatsiya (?audience=...) ---
+  audiences: {
+    general: null, // default hero ishlatiladi
+    owner: {
+      title:
+        "3 soatda biznesingizdagi qaytariladigan ishlarni AI-xodimlarga topshirishni boshlang",
+      subtitle:
+        "Operatsionkadan chiqish, jarayonlarni avtomatlashtirish va asosiy raqamlarni bitta dashboarddan nazorat qilishni amalda o'rganing.",
+    },
+    manager: {
+      title: "3 soatda bo'limingizni AI yordamida kamroq qo'lda boshqarishni o'rganing",
+      subtitle:
+        "Report, ma'lumot tahlili va qaytariladigan nazorat ishlarini AI yordamida tezlashtirib, strategik vazifalarga vaqt bo'shating.",
+    },
+    sales: {
+      title: "3 soatda sotuv bo'limingiz uchun 24/7 AI-yordamchilar yaratishni boshlang",
+      subtitle:
+        "Leadlar, mijoz suhbatlari, report va rutin nazoratda AI'dan real yordamchi sifatida foydalanishni o'rganing.",
+    },
+  },
+
+  // --- 1. Kim uchun? ---
+  forWhom: {
+    title: "Bu seminar kimlar uchun?",
+    cards: [
+      {
+        role: "Tadbirkor",
+        text: "Hamma muhim ish oxir-oqibat sizga kelib taqaladi. Xodimlarga vazifa berish, tekshirish, savollarga javob berish va reportlar strategiyaga vaqt qoldirmayapti.",
+      },
+      {
+        role: "Top-menejer / bo'lim rahbari",
+        text: "Kuningizning katta qismi xodimlarni nazorat qilish, report yig'ish, vazifalarni eslatish va turli platformalardagi ma'lumotlarni birlashtirishga ketadi.",
+      },
+      {
+        role: "Sotuv bo'limi rahbari",
+        text: "CRM, menejerlar, qo'ng'iroqlar, leadlar va hisobotlar orasida butun sotuv jarayonini qo'lda nazorat qilish qiyinlashgan.",
+      },
+    ],
+    endCopy:
+      "Agar shu holatlardan bittasi sizga tanish bo'lsa — seminardagi AI tizimlari aynan sizning ish jarayoningizga mos keladi.",
+  },
+
+  // --- 2. Transformatsiya ---
   outcomes: {
-    title: "Seminardan keyin nima o'zgaradi",
+    title: "Seminardan keyin nima o'zgaradi?",
     items: [
       {
-        title: "\"Operatsionka\"dan chiqasiz",
-        text: "Kundalik rutinani AI-ga topshirib, biznesni strateg sifatida boshqarishni o'rganasiz.",
+        title: "\"Operatsionka\"dan chiqishni boshlaysiz",
+        text: "Biznesingizdagi takroriy ishlarni aniqlab, qaysilarini AI'ga topshirish mumkinligini tushunasiz. Vaqtingizni mayda operatsion vazifalarga emas, qaror va strategiyaga ko'proq ajratasiz.",
       },
       {
         title: "24/7 ishlaydigan AI-xodimlar",
-        text: "Yangi odam yollamay xarajatni kamaytirish va sotuvni 2 barobar oshirish mexanikasi.",
+        text: "Biznesingiz haqidagi ma'lumotlar bilan ishlaydigan AI-agentlarni qanday yaratish mumkinligini tushunasiz.",
+        bullets: [
+          "mijozga javob",
+          "lead saralash",
+          "ma'lumot tahlili",
+          "report va summary",
+          "takroriy vazifalar",
+        ],
       },
       {
         title: "Bitta dashboard",
-        text: "Barcha raqamlar va agentlar ishi telefoningizdagi bitta ekranda — qo'lda hisobotsiz.",
+        text: "Asosiy raqamlar va AI-agentlar faoliyatini turli platformalardan qidirish o'rniga, ularni bitta boshqaruv ekranida kuzatish logikasini olasiz.",
       },
     ],
   },
 
-  // --- Muammo bloki ---
-  pain: {
-    title: "Tanish holatmi?",
-    items: [
-      "Kun bo'yi band, lekin kechqurun \"bugun nima qildim?\" degan savolga javob yo'q.",
-      "Har bir jarayon siz orqali o'tadi — siz to'xtasangiz, biznes ham to'xtaydi.",
-      "Raqamlar jadvallarda, boshi berk. Qaror \"ko'z bilan chamalab\" qabul qilinadi.",
-      "AI haqida ko'p eshitasiz, lekin ChatGPT'da matn yozishdan nariga o'tmadingiz.",
-    ],
-    conclusion:
-      "Muammo vaqt yetishmasligida emas. Muammo — biznesda sizsiz ishlaydigan tizim yo'qligida.",
-  },
-
-  // --- Dastur ---
+  // --- 3. Amalda nima qilamiz ---
   program: {
-    title: "Seminar dasturi",
-    note: "4 soat. Har bir blokdan keyin — o'z biznesingizga tatbiq qilish uchun aniq qadam.",
-    blocks: [
+    title:
+      "3 soat ichida nazariya emas — biznesingizdagi real jarayonlar ustida ishlaysiz",
+    steps: [
       {
-        time: "10:00",
-        title: "2026-da AI biznesda nima real ishlaydi",
-        text: "Qaysi vositalar haqiqatan pul va vaqt tejaydi, qaysilari shunchaki shovqin. Bozordagi real keyslar.",
+        n: "01",
+        title: "AI imkoniyatlar xaritasi",
+        text: "Biznesingizdagi qaytariladigan jarayonlarni ajratasiz va qaysi ishlarni AI'ga topshirish mumkinligini aniqlaysiz.",
       },
       {
-        time: "10:30",
-        title: "Poydevor: biznesni AI tushunadigan bazaga solish",
-        text: "Bozor va raqobat tahlili soatlar emas, daqiqalarda. Biznesingiz haqidagi bilim AI ichiga ko'chadi.",
-        tools: "Claude · NotebookLM",
+        n: "02",
+        title: "AI-agent yaratish",
+        text: "Agentga rol, vazifa, maqsad, qoidalar va chegaralar berishni o'rganasiz.",
       },
       {
-        time: "11:30",
-        title: "Tanaffus va tanishuv",
-        text: "Zaldagi tadbirkorlar bilan networking.",
-        tools: "",
-        muted: true,
+        n: "03",
+        title: "AI'ni biznesingizni \"biladigan\" qilasiz",
+        text: "Mahsulot, xizmat, narxlar, FAQ, script va ichki ma'lumotlar asosida knowledge base yaratish logikasini ko'rasiz.",
       },
       {
-        time: "11:45",
-        title: "AI-xodimlar: 3 ta agentni jonli quramiz",
-        text: "Kontent, sotuv va mijozlar bilan ishlash agentlari. Ekranda boshidan oxirigacha ko'rsatiladi.",
-        tools: "Claude Code · ChatPlace · n8n",
+        n: "04",
+        title: "24/7 AI sotuvchi",
+        text: "Instagram yoki Telegramda mijozga javob, ehtiyojini aniqlash, lead olish va kerak bo'lsa operatorga uzatish mexanikasi qanday ishlashini ko'rasiz.",
       },
       {
-        time: "12:45",
-        title: "Boshqaruv pulti: hammasi bitta ekranda",
-        text: "Agentlar va raqamlarni bitta dashboardga yig'ish, uni internetga chiqarish va telefondan ochish.",
-        tools: "Google Sheets · Railway",
+        n: "05",
+        title: "AI yordamida rahbarlik",
+        text: "Report, summary, katta hajmdagi ma'lumotni tahlil qilish va jarayondagi muammolarni ajratish kabi vazifalarni qanday yengillashtirish mumkinligini ko'rasiz.",
       },
       {
-        time: "13:30",
-        title: "Savol-javob va sizning keyingi qadamingiz",
-        text: "Har bir ishtirokchi o'z biznesida nimadan boshlashini aniq bilib ketadi.",
+        n: "06",
+        title: "Dashboard va nazorat",
+        text: "Biznesdagi muhim ko'rsatkichlarni rahbar uchun tushunarli bitta panelga yig'ish logikasini olasiz.",
+      },
+      {
+        n: "07",
+        title: "Implementatsiya plan",
+        text: "Seminar oxirida \"AI'dan nimadan boshlayman?\" degan savol bilan emas, \"ertadan biznesimda mana shu jarayonni AI'ga beraman\" degan aniq action-plan bilan chiqasiz.",
       },
     ],
   },
 
-  // --- Kimga mos ---
-  fit: {
-    title: "Bu seminar sizga to'g'ri keladimi?",
-    yes: {
-      title: "Ha, agar siz:",
-      items: [
-        "Biznesi yoki jamoasi bor, lekin operatsionda yonib ketayotgan tadbirkor",
-        "Sotuv bo'limi rahbari — nazorat va hisobotni avtomatlashtirmoqchi",
-        "Marketolog yoki agentlik egasi — rutinani kamaytirib, marjani oshirmoqchi",
-        "Ekspert — bilim va tajribasini AI-mahsulotga aylantirmoqchi",
-      ],
-    },
-    no: {
-      title: "Yo'q, agar siz:",
-      items: [
-        "\"Sehrli tugma\" izlayapsiz va o'zingiz ishlashni istamaysiz",
-        "AI'ni faqat qiziqish uchun, biznesga tatbiq qilmasdan o'rganmoqchisiz",
-        "Ko'rgan narsangizni keyin qo'llash niyatingiz yo'q",
-      ],
-    },
+  // --- 4. Sendly proof ---
+  proof: {
+    title: "Bu faqat nazariya emas",
+    subtitle: "Isroil real bizneslar uchun AI-agent mahsulotlari ustida ishlaydi",
+    body: [
+      "Isroil Abdullayevning eng katta loyihalaridan biri — Sendly.",
+      "Sendly bizneslarga Instagram va Telegram orqali mijozlar bilan ishlaydigan AI-agentlarni yo'lga qo'yishga yordam beradi.",
+    ],
+    capabilities: [
+      "biznes ma'lumotlari asosida javob beradi",
+      "mijoz ehtiyojini aniqlaydi",
+      "lead ma'lumotlarini yig'adi",
+      "kerak bo'lsa suhbatni inson operatorga uzatadi",
+      "suhbatlar va leadlarni tizimlashtiradi",
+    ],
+    closing:
+      "Seminarda siz aynan shunday tizimlar ortidagi logikani o'z biznesingizga qanday qo'llash mumkinligini tushunasiz.",
+    chips: [
+      { big: "24/7", small: "AI yordamchi" },
+      { big: "Instagram + Telegram", small: "mijozlar bilan ishlash" },
+      { big: "1 panel", small: "suhbatlar va leadlar" },
+    ],
   },
 
-  objection: {
-    title: "\"Men sun'iy intellektni uncha tushunmayman\" deb qo'rqmang",
-    text: "Bu yerda kod yozmaysiz va noutbuk olib kelish shart emas. Isroil har bir qadamni ekranda o'zi ko'rsatib beradi, siz oddiy til va tayyor shablonlar bilan ishlaysiz. Telegramdan foydalana olsangiz — bu yerda ham uddalaysiz.",
+  // --- 5. Ekspert ---
+  expert: {
+    title: "Seminarni kim o'tadi?",
+    name: "Isroil Abdullayev",
+    photo: "/isroil.webp",
+    facts: [
+      "3 yildan beri AI sohasida",
+      "Xalqaro ChatPlace kompaniyasida rahbarlik qilgan",
+      "MFaktor AI Hub loyihalarida ishlagan",
+      "Milliard Club'da AI bo'yicha dars bergan",
+      "Sendly loyihasi ustida ishlaydi",
+    ],
+    body: "Isroilning asosiy farqi — AI haqida faqat kontent qilmaydi. U AI-agentlar va avtomatizatsiyalarni real biznes jarayonlariga integratsiya qiladigan mahsulotlar ustida ishlaydi.",
   },
 
-  // --- Nimalarni olib ketasiz ---
+  // --- 6. Nima olib ketasiz ---
   takeaways: {
-    title: "Seminardan nima olib ketasiz",
+    title:
+      "Seminardan faqat bilim bilan emas, tayyor instrumentlar bilan chiqasiz",
     items: [
-      "4 soatlik amaliy offline seminar — zalda jonli ko'rsatib boriladi",
-      "Biznes uchun TOP promptlar to'plami",
-      "AI-agentlar uchun tayyor shablonlar",
-      "Dashboard shabloni — o'z raqamlaringizni qo'yib ishlatasiz",
-      "Claude va NotebookLM bo'yicha video darslik",
-      "Ishtirokchilarning yopiq guruhiga kirish",
+      "3 soatlik amaliy offline seminar",
+      "Biznes uchun TOP AI promptlar to'plami",
+      "AI-agent yaratish uchun tayyor shablonlar",
+      "AI sotuvchi uchun system-prompt shabloni",
+      "Knowledge base yaratish shabloni",
+      "Lead qualification savollari shabloni",
+      "AI → operator handoff logikasi",
+      "Dashboard shabloni",
+      "Claude va NotebookLM bo'yicha videodars",
+      "Seminar qatnashchilarining yopiq guruhiga kirish",
+      "Biznes uchun AI implementatsiya checklist",
+    ],
+    closing:
+      "Seminardan keyin hammasini boshidan yig'ib o'tirmaysiz — asosiy shablon va materiallarni o'zingiz bilan olib ketasiz.",
+  },
+
+  // --- 7. FAQ ---
+  faq: {
+    title: "Ko'p so'raladigan savollar",
+    items: [
+      {
+        q: "AI haqida deyarli hech narsa bilmayman. Qatnasha olamanmi?",
+        a: "Ha. Seminar AI'dan biznesda amaliy foydalanishni boshlash uchun qurilgan. Oldindan chuqur texnik bilim talab qilinmaydi.",
+      },
+      {
+        q: "Dasturchi bo'lishim kerakmi?",
+        a: "Yo'q. Seminar kod yozishni o'rgatmaydi. Asosiy e'tibor tayyor AI instrumentlari va agentlar yordamida biznes jarayonlarini yengillashtirishga qaratiladi.",
+      },
+      {
+        q: "Seminar kimlar uchun eng foydali?",
+        a: "Biznes egalari, top-menejerlar, bo'lim rahbarlari va sotuv bo'limi rahbarlari uchun.",
+      },
+      {
+        q: "Noutbuk olib kelishim kerakmi?",
+        a: "Seminardan maksimal foyda olish va amaliy vazifalarni bajarish uchun noutbuk bilan kelish tavsiya etiladi.",
+      },
+      {
+        q: "AI xodimlarimni almashtiradimi?",
+        a: "Seminarning maqsadi xodimlarni shunchaki almashtirish emas. AI takroriy va vaqt oladigan vazifalarni o'z zimmasiga oladi. Inson esa muzokara, nazorat, muhim qaror va strategiyaga ko'proq vaqt ajratadi.",
+      },
+      {
+        q: "Seminardan keyin materiallar qoladimi?",
+        a: "Ha. Promptlar, agent shablonlari, dashboard shabloni, qo'shimcha videodarslar va yopiq guruhga kirish olasiz.",
+      },
+      {
+        q: "Seminarda o'z biznesim uchun agent rejalashtira olamanmi?",
+        a: "Ha. Seminar umumiy nazariya emas. O'z biznesingizdagi real jarayonlar asosida qaysi vazifalarni AI'ga topshirish mumkinligini aniqlaysiz.",
+      },
     ],
   },
 
-  // --- FAQ ---
-  faq: [
-    {
-      q: "Seminar qayerda va qachon bo'ladi?",
-      a: "20-sentabr, yakshanba kuni, Toshkent shahridagi MFaktor'da, soat 10:00 dan 14:00 gacha.",
-    },
-    {
-      q: "Narxi qancha?",
-      a: "Ishtirok narxi — 297 000 so'm. Narx o'zgarmaydi, lekin joy soni 100 ta bilan cheklangan.",
-    },
-    {
-      q: "Noutbuk olib kelish kerakmi?",
-      a: "Shart emas. Barcha amaliyot ekranda ko'rsatib boriladi, siz yozib olasiz va materiallarni keyin olasiz.",
-    },
-    {
-      q: "Men AI'dan umuman xabarim yo'q, tushunolamanmi?",
-      a: "Ha. Seminar noldan boshlanadi va texnik atamalar emas, biznes tilida olib boriladi.",
-    },
-    {
-      q: "Toshkentga kela olmasam-chi?",
-      a: "Ro'yxatdan o'tishda \"Onlayn qatnashaman\" ni belgilang — onlayn format bo'yicha imkoniyat chiqsa, sizga birinchi bo'lib xabar beramiz.",
-    },
-    {
-      q: "To'lov qanday amalga oshiriladi?",
-      a: "Ro'yxatdan o'tganingizdan so'ng jamoamiz siz bilan bog'lanadi va to'lov usullarini tushuntiradi.",
-    },
-  ],
+  // --- 8. Narx bloki ---
+  priceBlock: {
+    title: "20-sentabr kuni biznesingizda AI tizimlarini qurishni boshlang",
+    scarcity: "Offline format — atigi 100 ta joy",
+    microcopy:
+      "Ariza qoldiring — menejerimiz siz bilan bog'lanib, ishtirok tafsilotlarini tushuntiradi.",
+  },
 
-  // --- Forma (2-ekran) ---
+  // --- Forma ---
   form: {
-    title: "Seminarga yozilish",
-    subtitle: "Ma'lumotlaringizni qoldiring — jamoamiz siz bilan bog'lanadi.",
+    title: "Joyingizni band qiling",
+    subtitle:
+      "Ma'lumotlaringizni qoldiring — menejerimiz seminar tafsilotlari bo'yicha siz bilan bog'lanadi.",
+
     nameLabel: "Ismingiz",
-    namePlaceholder: "Ismingiz",
+    namePlaceholder: "Masalan: Aziz",
+
     phoneLabel: "Telefon raqamingiz",
-    formatLabel: "Seminar Toshkent shahrida bo'lib o'tadi, kela olasizmi?",
-    formatOffline: "Kela olaman",
-    formatOnline: "Onlayn qatnashaman",
-    submit: "DAVOM ETISH",
+    phonePlaceholder: "(90) 123-45-67",
+
+    roleLabel: "Faoliyat turingiz",
+    rolePlaceholder: "Tanlang",
+
+    submit: "JOYIMNI BAND QILAMAN",
     sending: "Yuborilmoqda...",
-    timerNote: "Joyingiz shu vaqt davomida band qilib turiladi",
     consent:
       "Tugmani bosish orqali siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz.",
+
     errors: {
       name: "Ismingizni kiriting",
-      phone: "Telefon raqamini to'liq kiriting",
-      format: "Qatnashish formatini tanlang",
+      nameChars: "Ismda faqat harflar bo'lishi kerak",
+      role: "Faoliyat turingizni tanlang",
       network: "Yuborilmadi. Internetni tekshirib, qayta urinib ko'ring.",
+      // Telefon xatolari
+      phoneEmpty: "Telefon raqamingizni kiriting",
+      phoneShort: "Raqam to'liq emas",
+      phoneCode: "Bunday operator kodi mavjud emas",
+      phoneFake: "Iltimos, haqiqiy raqamingizni kiriting",
     },
   },
 
-  // --- Rahmat (3-ekran) ---
+  // --- Faoliyat turi variantlari ---
+  // value → Sheets va Meta'ga ketadi, label → foydalanuvchi ko'radi
+  roles: [
+    { value: "owner", label: "Biznes egasi / tadbirkor" },
+    { value: "manager", label: "Rahbar / TOP-menejer / ROP" },
+    { value: "marketing", label: "Marketolog / SMM / targetolog" },
+    { value: "other", label: "Boshqa" },
+  ],
+
+  // --- Rahmat ekrani ---
   success: {
-    title: "oxirgi qadam qoldi!",
-    text: "Seminar haqidagi barcha ma'lumot, joy va to'lov tafsilotlari Telegram kanalimizda. Quyidagi tugmani bosib o'ting.",
+    title: "Arizangiz qabul qilindi",
+    text: "Menejerimiz tez orada siz bilan bog'lanadi.",
+    telegramNote:
+      "Seminar haqidagi yangiliklarni birinchi bo'lib olish uchun Telegram kanalimizga qo'shiling.",
     button: "TELEGRAMGA O'TISH",
-    note: "Telegramga o'tganingizdan so'ng seminar haqida birinchi bo'lib xabar olasiz.",
   },
 
   footer: {
@@ -244,10 +322,27 @@ export const site = {
   },
 
   meta: {
-    title: "AI Biznes Seminar — Isroil Abdullayev | 20-sentabr, Toshkent",
+    title:
+      "AI Biznes Seminar — Isroil Abdullayev | 20-sentabr, MFaktor, Toshkent",
     description:
-      "1 kunlik offline seminar: operatsiondan chiqing, 24/7 AI-xodimlar qo'ying va biznesni bitta dashboarddan boshqaring. 20-sentabr, MFaktor, Toshkent.",
+      "Tadbirkorlar va rahbarlar uchun 3 soatlik amaliy offline seminar. 24/7 ishlaydigan AI-xodimlar, avtomatlashtirish va bitta dashboard. 20-sentabr, MFaktor, Toshkent.",
   },
 };
+
+// O'zbekiston mobil operator kodlari (raqamning birinchi 2 raqami)
+export const ALLOWED_OPERATOR_CODES = [
+  "20", "33", "50", "55", "77", "88",
+  "90", "91", "93", "94", "95", "97", "98", "99",
+];
+
+// Aniq rad etiladigan 7 raqamli shablonlar (kodning ketidan keladigan qism)
+export const BLACKLISTED_SUBSCRIBER_NUMBERS = [
+  "0000000",
+  "1111111",
+  "1234567",
+  "7654321",
+  "0123456",
+  "9999999",
+];
 
 export default site;

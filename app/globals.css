@@ -18,6 +18,18 @@ body {
   overflow-x: hidden;
 }
 
+/* Mobil sticky CTA panel kontentni yopib qolmasligi uchun */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+}
+
+/* iPhone home indicator zonasi */
+.sticky-bar {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -49,7 +61,7 @@ body {
   .btn-primary,
   .btn-cta,
   .btn-invert {
-    @apply inline-flex w-full items-center justify-center rounded-full bg-lime px-7 py-4
+    @apply inline-flex min-h-[48px] w-full items-center justify-center rounded-full bg-lime px-7 py-4
            text-[15px] font-extrabold tracking-wide text-limeInk
            transition-colors duration-150 active:scale-[0.985]
            sm:w-auto sm:text-base;

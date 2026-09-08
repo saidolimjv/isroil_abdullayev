@@ -1,7 +1,6 @@
 import PageShell from "@/components/PageShell";
-import site from "@/content/site";
 
+// TEST B — muqobil sarlavha
 export default function PageV2() {
-  const v = site.heroVariants.v2;
-  return <PageShell heroTitle={v.title} heroSubtitle={v.subtitle} />;
+  return <PageShell variant="B" />;
 }
