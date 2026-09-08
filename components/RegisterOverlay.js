@@ -110,6 +110,24 @@ export default function RegisterOverlay({ open, onClose }) {
   const roleError = showRole && !role ? t.errors.role : "";
   const roleLabel = site.roles.find((r) => r.value === role)?.label || "";
 
+  /**
+   * Maska bilan ishlaganda Backspace ajratgichni o'chirsa, raqamlar
+   * o'zgarmaydi va maska uni qayta qo'yadi — natijada raqam o'chmay qoladi.
+   * Shuning uchun: matn qisqargan, lekin raqamlar bir xil bo'lsa,
+   * oxirgi raqamni o'zimiz olib tashlaymiz.
+   */
+  function handlePhoneChange(ev) {
+    const next = ev.target.value;
+    const nextDigits = extractDigits(next);
+    const shrunk = next.length < formatNational(phone).length;
+
+    if (shrunk && nextDigits === digits) {
+      setPhone(digits.slice(0, -1));
+      return;
+    }
+    setPhone(nextDigits);
+  }
+
   async function submit() {
     setSubmitted(true);
     if (sending || !isComplete) return;
@@ -211,7 +229,12 @@ export default function RegisterOverlay({ open, onClose }) {
                 id="name"
                 ref={nameRef}
                 type="text"
-                autoComplete="name"
+                name="ism-qol"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
+                data-lpignore="true"
+                data-form-type="other"
                 value={name}
                 onChange={(ev) => setName(ev.target.value)}
                 onBlur={() => setTouched((s) => ({ ...s, name: true }))}
@@ -241,10 +264,15 @@ export default function RegisterOverlay({ open, onClose }) {
                   id="phone"
                   type="tel"
                   inputMode="numeric"
-                  autoComplete="tel"
+                  name="tel-qol"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  data-lpignore="true"
+                  data-form-type="other"
                   maxLength={16}
                   value={formatNational(phone)}
-                  onChange={(ev) => setPhone(extractDigits(ev.target.value))}
+                  onChange={handlePhoneChange}
                   onBlur={() => setTouched((s) => ({ ...s, phone: true }))}
                   placeholder={t.phonePlaceholder}
                   aria-invalid={!!phoneError}

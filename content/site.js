@@ -207,7 +207,7 @@ export const site = {
     namePlaceholder: "Masalan: Aziz",
 
     phoneLabel: "Telefon raqamingiz",
-    phonePlaceholder: "(90) 123-45-67",
+    phonePlaceholder: "90 123-45-67",
 
     roleLabel: "Faoliyat turingiz",
     rolePlaceholder: "Tanlang",
