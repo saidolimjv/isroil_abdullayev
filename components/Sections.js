@@ -47,7 +47,7 @@ export function Hero({ onRegister, title, subtitle }) {
       <div className="wrap grid gap-8 pb-10 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:pb-16 lg:pt-12">
         {/* Chap ustun: matn + CTA (mobil'da birinchi) */}
         <div>
-          <p className="text-[12px] font-extrabold uppercase leading-snug tracking-[0.12em] text-lime sm:text-[13px]">
+          <p className="text-[12px] font-extrabold uppercase leading-snug tracking-[0.06em] text-lime [overflow-wrap:anywhere] sm:text-[13px] sm:tracking-[0.12em]">
             {site.hero.preheadline}
           </p>
 
@@ -124,7 +124,7 @@ export function ForWhom() {
         <SectionTitle>{site.forWhom.title}</SectionTitle>
         <div className="mt-7 grid gap-3 sm:grid-cols-3 sm:gap-4">
           {site.forWhom.cards.map((c) => (
-            <div key={c.role} className="card p-5 sm:p-6">
+            <div key={c.role} className="card min-w-0 p-5 sm:p-6">
               <div className="text-[12px] font-extrabold uppercase tracking-[0.1em] text-lime">
                 {c.role}
               </div>
@@ -166,7 +166,7 @@ export function Outcomes() {
         <SectionTitle>{site.outcomes.title}</SectionTitle>
         <div className="mt-7 grid gap-3 sm:grid-cols-3 sm:gap-4">
           {site.outcomes.items.map((o, i) => (
-            <div key={o.title} className="card p-5 sm:p-6">
+            <div key={o.title} className="card min-w-0 p-5 sm:p-6">
               <div className="icon-badge">
                 <div className="h-5 w-5">{OUTCOME_ICONS[i]}</div>
               </div>
@@ -206,11 +206,11 @@ export function Program({ onRegister }) {
 
         <ol className="mt-8 grid gap-3 md:grid-cols-2 md:gap-4">
           {site.program.steps.map((s) => (
-            <li key={s.n} className="card flex gap-4 p-5">
+            <li key={s.n} className="card flex min-w-0 gap-4 p-5">
               <span className="font-mono text-[15px] font-extrabold leading-none text-lime">
                 {s.n}
               </span>
-              <div>
+              <div className="min-w-0">
                 <h3 className="text-[16px] font-bold leading-snug text-ink sm:text-[17px]">
                   {s.title}
                 </h3>
@@ -267,7 +267,7 @@ export function Proof() {
 
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
             {site.proof.chips.map((c) => (
-              <div key={c.big} className="card p-5">
+              <div key={c.big} className="card min-w-0 p-5">
                 <div className="text-[18px] font-extrabold leading-tight text-lime">
                   {c.big}
                 </div>

@@ -53,6 +53,13 @@ body {
     @apply mx-auto w-full max-w-page px-5 sm:px-6;
   }
 
+  /* Zoom yoki juda tor ekranda ham uzun so'zlar kesilmasin */
+  h1,
+  h2,
+  .section-title {
+    overflow-wrap: anywhere;
+  }
+
   .section-title {
     @apply text-[26px] leading-[1.15] font-extrabold tracking-tight text-ink sm:text-[38px];
   }

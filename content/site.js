@@ -20,16 +20,16 @@ export const site = {
 
   // --- CTA matnlari ---
   cta: {
-    hero: "100 TA JOYDAN BIRINI BAND QILAMAN",
-    mid: "SEMINARGA JOYIMNI BAND QILAMAN",
-    sticky: "JOYIMNI BAND QILAMAN",
-    final: "JOYIMNI BAND QILAMAN",
+    hero: "SEMINARGA YOZILISH",
+    mid: "SEMINARGA YOZILISH",
+    sticky: "SEMINARGA YOZILISH",
+    final: "SEMINARGA YOZILISH",
   },
 
   // --- Hero ---
   hero: {
     preheadline: "Tadbirkorlar va rahbarlar uchun 3 soatlik amaliy AI seminar",
-    title: "3 soatda biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni boshlang",
+    title: "Biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni o'rganing",
     subtitle:
       "Qaytariladigan ishlarni AI'ga topshirish, biznes va sotuv jarayonlarini avtomatlashtirish hamda asosiy raqamlarni bitta dashboarddan nazorat qilishni Isroil Abdullayev bilan amalda o'rganing.",
     microcopy: "Offline format • Joylar soni cheklangan",
@@ -40,13 +40,13 @@ export const site = {
   // --- A/B test sarlavhalari (/, /v2, /v3) ---
   headlineTests: {
     A: {
-      title: "3 soatda biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni boshlang",
+      title: "Biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni o'rganing",
     },
     B: {
-      title: "3 soatda AI orqali biznesingizni boshqarishni yengillashtiring",
+      title: "AI orqali biznesingizni boshqarishni yengillashtiring",
     },
     C: {
-      title: "3 soatda biznesingizdagi qaytariladigan ishlarni AI'ga topshirishni boshlang",
+      title: "Biznesingizdagi qaytariladigan ishlarni AI'ga topshirishni o'rganing",
     },
   },
 
@@ -55,17 +55,17 @@ export const site = {
     general: null, // default hero ishlatiladi
     owner: {
       title:
-        "3 soatda biznesingizdagi qaytariladigan ishlarni AI-xodimlarga topshirishni boshlang",
+        "Biznesingizdagi qaytariladigan ishlarni AI-xodimlarga topshirishni o'rganing",
       subtitle:
         "Operatsionkadan chiqish, jarayonlarni avtomatlashtirish va asosiy raqamlarni bitta dashboarddan nazorat qilishni amalda o'rganing.",
     },
     manager: {
-      title: "3 soatda bo'limingizni AI yordamida kamroq qo'lda boshqarishni o'rganing",
+      title: "Bo'limingizni AI yordamida kamroq qo'lda boshqarishni o'rganing",
       subtitle:
         "Report, ma'lumot tahlili va qaytariladigan nazorat ishlarini AI yordamida tezlashtirib, strategik vazifalarga vaqt bo'shating.",
     },
     sales: {
-      title: "3 soatda sotuv bo'limingiz uchun 24/7 AI-yordamchilar yaratishni boshlang",
+      title: "Sotuv bo'limingiz uchun 24/7 AI-yordamchilar yaratishni o'rganing",
       subtitle:
         "Leadlar, mijoz suhbatlari, report va rutin nazoratda AI'dan real yordamchi sifatida foydalanishni o'rganing.",
     },
@@ -279,7 +279,7 @@ export const site = {
     roleLabel: "Faoliyat turingiz",
     rolePlaceholder: "Tanlang",
 
-    submit: "JOYIMNI BAND QILAMAN",
+    submit: "SEMINARGA YOZILISH",
     sending: "Yuborilmoqda...",
     consent:
       "Tugmani bosish orqali siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz.",
