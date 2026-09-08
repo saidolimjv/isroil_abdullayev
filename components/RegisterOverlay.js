@@ -17,13 +17,9 @@ const TELEGRAM_URL =
 // Ism: harflar (lotin + kirill), bo'sh joy, apostrof va defis
 const NAME_RE = /^[\p{L}\s'’-]+$/u;
 
-/** pathname → variant nomi */
+/** Sayt bitta sahifadan iborat — Sheets'da manba ustuni uchun */
 function currentVariant() {
-  if (typeof window === "undefined") return "v1";
-  const p = window.location.pathname.replace(/\/+$/, "");
-  if (p === "/v2") return "v2";
-  if (p === "/v3") return "v3";
-  return "v1";
+  return "main";
 }
 
 export default function RegisterOverlay({ open, onClose }) {

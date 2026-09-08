@@ -32,83 +32,79 @@ function Check() {
   );
 }
 
+/* ---------------------------------- Ticket strip ---------------------------------- */
+
+function TicketStrip() {
+  const cells = [
+    { top: e.dateLabel, bottom: e.dayLabel },
+    { top: e.venue, bottom: e.city },
+    { top: e.time, bottom: e.duration },
+  ];
+  return (
+    <div className="flex w-full max-w-[520px] items-stretch overflow-hidden rounded-2xl border border-line bg-surface">
+      {cells.map((c, i) => (
+        <div
+          key={c.top}
+          className={
+            "min-w-0 flex-1 px-2 py-2.5 sm:px-4 " + (i > 0 ? "border-l border-line" : "")
+          }
+        >
+          <div className="text-[13px] font-extrabold leading-tight text-ink sm:text-[15px]">
+            {c.top}
+          </div>
+          <div className="mt-0.5 text-[11px] text-muted sm:text-[12px]">{c.bottom}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* -------------------------------------- Hero -------------------------------------- */
 
-export function Hero({ onRegister, title, subtitle }) {
-  const chips = [
-    e.dateLabel,
-    `${e.venue}, ${e.city}`,
-    e.time,
-    `${e.format} • ${e.duration}`,
-  ];
-
+export function Hero({ onRegister }) {
   return (
-    <header className="glow-top relative border-b border-line">
-      <div className="wrap grid gap-8 pb-10 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:pb-16 lg:pt-12">
-        {/* Chap ustun: matn + CTA (mobil'da birinchi) */}
-        <div>
-          <p className="text-[12px] font-extrabold uppercase leading-snug tracking-[0.06em] text-lime [overflow-wrap:anywhere] sm:text-[13px] sm:tracking-[0.12em]">
-            {site.hero.preheadline}
-          </p>
+    <header className="glow-top relative flex min-h-[100svh] flex-col border-b border-line">
+      <div className="wrap flex flex-1 flex-col items-center justify-start gap-4 pb-6 pt-5 text-center sm:gap-6 sm:pb-10 sm:pt-8">
+        <TicketStrip />
 
-          <h1 className="mt-4 max-w-[19ch] text-[clamp(28px,7vw,50px)] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink">
-            {title || site.hero.title}
-          </h1>
+        <h1 className="max-w-[16ch] text-[clamp(30px,7.6vw,54px)] font-extrabold leading-[1.06] tracking-[-0.02em] text-ink [overflow-wrap:anywhere]">
+          {site.hero.title}
+        </h1>
 
-          <p className="mt-4 max-w-[54ch] text-[15px] leading-relaxed text-muted sm:text-[17px]">
-            {subtitle || site.hero.subtitle}
-          </p>
+        <p className="max-w-[46ch] text-[clamp(14px,3.7vw,19px)] leading-snug text-muted">
+          {site.hero.subtitle}
+        </p>
 
-          {/* Info chiplar */}
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {chips.map((c) => (
-              <li
-                key={c}
-                className="rounded-full border border-line bg-surface px-3.5 py-2 text-[13px] font-bold text-ink sm:text-[14px]"
-              >
-                {c}
-              </li>
-            ))}
-          </ul>
-
-          {/* Narx + CTA */}
-          <div className="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <span className="text-[34px] font-extrabold leading-none tracking-tight text-ink sm:text-[40px]">
-              {e.price}
-            </span>
-            <span className="text-[16px] font-bold text-muted">{e.currency}</span>
+        {/* Rasm va tugma bitta blokda — orasida bo'shliq qolmaydi */}
+        <div className="flex w-full flex-1 flex-col items-center justify-end">
+          <div className="relative aspect-square w-full max-w-[399px]">
+            <div
+              aria-hidden="true"
+              className="absolute left-1/2 top-1/2 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/25 blur-3xl"
+            />
+            <Image
+              src={site.expert.photo}
+              alt={site.expert.name}
+              fill
+              priority
+              sizes="(max-width: 640px) 87vw, 418px"
+              className="relative object-contain object-bottom"
+            />
           </div>
 
-          <button
-            type="button"
-            onClick={() => onRegister("hero_cta_click")}
-            className="btn-cta mt-5 w-full sm:w-auto"
-          >
-            {site.cta.hero}
-          </button>
+          <div className="w-full max-w-[420px] shrink-0">
+            <button
+              type="button"
+              onClick={() => onRegister("hero_cta_click")}
+              className="btn-cta btn-shine w-full"
+            >
+              {site.cta.hero}
+            </button>
 
-          <p className="mt-3 text-[13px] text-muted">{site.hero.microcopy}</p>
-          <p className="mt-2 inline-flex items-center gap-2 text-[13px] font-bold text-lime">
-            <Check />
-            {site.hero.trustLine}
-          </p>
-        </div>
-
-        {/* O'ng ustun: rasm — mobilda CTA'dan keyin, balandligi cheklangan */}
-        <div className="relative order-last">
-          <div
-            aria-hidden="true"
-            className="absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/20 blur-3xl"
-          />
-          <Image
-            src={site.expert.photo}
-            alt={site.expert.name}
-            width={800}
-            height={800}
-            priority
-            sizes="(max-width: 1024px) 62vw, 460px"
-            className="relative mx-auto h-auto w-[62%] max-w-[300px] object-contain lg:w-full lg:max-w-[460px]"
-          />
+            <p className="mt-3 text-[13px] text-muted">
+              {e.price} {e.currency} • {site.hero.microcopy}
+            </p>
+          </div>
         </div>
       </div>
     </header>

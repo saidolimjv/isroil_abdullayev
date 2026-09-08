@@ -36,31 +36,13 @@ sana, narx, joy soni, sarlavhalar, kartalar, dastur, FAQ, forma.
 Hero → Kim uchun → 3 transformatsiya → 3 soatda nima qilamiz (7 qadam) →
 Sendly proof → Ekspert → Nima olib ketasiz → FAQ → Narx bloki → Footer.
 
-## 5. A/B test (hero sarlavhasi)
+## 5. Bitta sahifa
 
-| URL | Variant | Manba |
-|---|---|---|
-| `/` | TEST A (default) | `headlineTests.A` |
-| `/v2` | TEST B | `headlineTests.B` |
-| `/v3` | TEST C | `headlineTests.C` |
+Sayt bitta `/` sahifadan iborat. A/B variantlar (`/v2`, `/v3`) va
+`?audience=` personalizatsiyasi olib tashlangan — sarlavha universal.
 
-Uchalasi bitta `components/PageShell.js` dan foydalanadi — forma, bo'limlar,
-backend bir xil. Faqat hero sarlavhasi farq qiladi.
-
-## 6. Auditoriya personalizatsiyasi (message match)
-
-URL query param orqali hero sarlavha/subtitle almashadi:
-
-- `?audience=owner` — tadbirkor / biznes egasi
-- `?audience=manager` — top-menejer / bo'lim rahbari
-- `?audience=sales` — sotuv bo'limi rahbari
-- parametr yo'q yoki `general` — default sarlavha
-
-Matnlar `content/site.js` → `audiences` ichida.
-Reklama to'plamlarini shu parametrlar bilan yo'naltirsangiz, e'lon va
-landing sarlavhasi bir-biriga mos keladi (message match).
-
-**Ustuvorlik:** `audience` > A/B variant > default.
+UTM parametrlari (`utm_source`, `utm_medium`, ...) hamon o'qiladi va
+lead bilan birga Google Sheets'ga yuboriladi.
 
 ## 7. Rasm
 

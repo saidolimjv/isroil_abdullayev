@@ -29,46 +29,11 @@ export const site = {
   // --- Hero ---
   hero: {
     preheadline: "Tadbirkorlar va rahbarlar uchun 3 soatlik amaliy AI seminar",
-    title: "Biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni o'rganing",
+    title: "24/7 ishlaydigan AI-xodimlarni yaratishni o'rganing",
     subtitle:
-      "Qaytariladigan ishlarni AI'ga topshirish, biznes va sotuv jarayonlarini avtomatlashtirish hamda asosiy raqamlarni bitta dashboarddan nazorat qilishni Isroil Abdullayev bilan amalda o'rganing.",
+      "AI-xodimlarni real biznes vazifalariga moslab, ish jarayonlarini avtomatlashtirishni o'rganing.",
     microcopy: "Offline format • Joylar soni cheklangan",
     trustLine: "Dasturchi bo'lish shart emas",
-    scarcity: "OFFLINE FORMAT • ATIGI 100 TA JOY",
-  },
-
-  // --- A/B test sarlavhalari (/, /v2, /v3) ---
-  headlineTests: {
-    A: {
-      title: "Biznesingiz uchun 24/7 ishlaydigan AI-xodimlar yaratishni o'rganing",
-    },
-    B: {
-      title: "AI orqali biznesingizni boshqarishni yengillashtiring",
-    },
-    C: {
-      title: "Biznesingizdagi qaytariladigan ishlarni AI'ga topshirishni o'rganing",
-    },
-  },
-
-  // --- Auditoriya bo'yicha personalizatsiya (?audience=...) ---
-  audiences: {
-    general: null, // default hero ishlatiladi
-    owner: {
-      title:
-        "Biznesingizdagi qaytariladigan ishlarni AI-xodimlarga topshirishni o'rganing",
-      subtitle:
-        "Operatsionkadan chiqish, jarayonlarni avtomatlashtirish va asosiy raqamlarni bitta dashboarddan nazorat qilishni amalda o'rganing.",
-    },
-    manager: {
-      title: "Bo'limingizni AI yordamida kamroq qo'lda boshqarishni o'rganing",
-      subtitle:
-        "Report, ma'lumot tahlili va qaytariladigan nazorat ishlarini AI yordamida tezlashtirib, strategik vazifalarga vaqt bo'shating.",
-    },
-    sales: {
-      title: "Sotuv bo'limingiz uchun 24/7 AI-yordamchilar yaratishni o'rganing",
-      subtitle:
-        "Leadlar, mijoz suhbatlari, report va rutin nazoratda AI'dan real yordamchi sifatida foydalanishni o'rganing.",
-    },
   },
 
   // --- 1. Kim uchun? ---
