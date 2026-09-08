@@ -6,7 +6,6 @@ import {
   ForWhom,
   Outcomes,
   Program,
-  Proof,
   Expert,
   Takeaways,
   Faq,
@@ -40,7 +39,6 @@ export default function PageShell() {
         <ForWhom />
         <Outcomes />
         <Program onRegister={openForm} />
-        <Proof />
         <Expert />
         <Takeaways />
         <Faq />

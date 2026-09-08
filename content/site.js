@@ -29,32 +29,24 @@ export const site = {
   // --- Hero ---
   hero: {
     preheadline: "Tadbirkorlar va rahbarlar uchun 3 soatlik amaliy AI seminar",
-    title: "24/7 ishlaydigan AI-xodimlarni yaratishni o'rganing",
+    title: "24/7 ishlaydigan AI-hodimlarni yasashni o'rganing",
     subtitle:
       "AI-xodimlarni real biznes vazifalariga moslab, ish jarayonlarini avtomatlashtirishni o'rganing.",
-    microcopy: "Offline format • Joylar soni cheklangan",
     trustLine: "Dasturchi bo'lish shart emas",
   },
 
   // --- 1. Kim uchun? ---
   forWhom: {
     title: "Bu seminar kimlar uchun?",
-    cards: [
-      {
-        role: "Tadbirkor",
-        text: "Hamma muhim ish oxir-oqibat sizga kelib taqaladi. Xodimlarga vazifa berish, tekshirish, savollarga javob berish va reportlar strategiyaga vaqt qoldirmayapti.",
-      },
-      {
-        role: "Top-menejer / bo'lim rahbari",
-        text: "Kuningizning katta qismi xodimlarni nazorat qilish, report yig'ish, vazifalarni eslatish va turli platformalardagi ma'lumotlarni birlashtirishga ketadi.",
-      },
-      {
-        role: "Sotuv bo'limi rahbari",
-        text: "CRM, menejerlar, qo'ng'iroqlar, leadlar va hisobotlar orasida butun sotuv jarayonini qo'lda nazorat qilish qiyinlashgan.",
-      },
+    items: [
+      "Tadbirkorlar",
+      "TOP-menejerlar",
+      "Bo'lim rahbarlari",
+      "Marketologlar",
+      "SMM mutaxassislari",
     ],
     endCopy:
-      "Agar shu holatlardan bittasi sizga tanish bo'lsa — seminardagi AI tizimlari aynan sizning ish jarayoningizga mos keladi.",
+      "Agar shu ro'yxatda o'zingizni ko'rsangiz — seminardagi AI tizimlari aynan sizning ish jarayoningizga mos keladi.",
   },
 
   // --- 2. Transformatsiya ---
@@ -123,30 +115,6 @@ export const site = {
         title: "Implementatsiya plan",
         text: "Seminar oxirida \"AI'dan nimadan boshlayman?\" degan savol bilan emas, \"ertadan biznesimda mana shu jarayonni AI'ga beraman\" degan aniq action-plan bilan chiqasiz.",
       },
-    ],
-  },
-
-  // --- 4. Sendly proof ---
-  proof: {
-    title: "Bu faqat nazariya emas",
-    subtitle: "Isroil real bizneslar uchun AI-agent mahsulotlari ustida ishlaydi",
-    body: [
-      "Isroil Abdullayevning eng katta loyihalaridan biri — Sendly.",
-      "Sendly bizneslarga Instagram va Telegram orqali mijozlar bilan ishlaydigan AI-agentlarni yo'lga qo'yishga yordam beradi.",
-    ],
-    capabilities: [
-      "biznes ma'lumotlari asosida javob beradi",
-      "mijoz ehtiyojini aniqlaydi",
-      "lead ma'lumotlarini yig'adi",
-      "kerak bo'lsa suhbatni inson operatorga uzatadi",
-      "suhbatlar va leadlarni tizimlashtiradi",
-    ],
-    closing:
-      "Seminarda siz aynan shunday tizimlar ortidagi logikani o'z biznesingizga qanday qo'llash mumkinligini tushunasiz.",
-    chips: [
-      { big: "24/7", small: "AI yordamchi" },
-      { big: "Instagram + Telegram", small: "mijozlar bilan ishlash" },
-      { big: "1 panel", small: "suhbatlar va leadlar" },
     ],
   },
 

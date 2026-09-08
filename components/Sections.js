@@ -76,8 +76,8 @@ export function Hero({ onRegister }) {
         </p>
 
         {/* Rasm va tugma bitta blokda — orasida bo'shliq qolmaydi */}
-        <div className="flex w-full flex-1 flex-col items-center justify-end">
-          <div className="relative aspect-square w-full max-w-[399px]">
+        <div className="flex w-full min-h-0 flex-1 flex-col items-center justify-end">
+          <div className="relative min-h-0 w-full max-w-[399px] flex-1">
             <div
               aria-hidden="true"
               className="absolute left-1/2 top-1/2 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/25 blur-3xl"
@@ -101,9 +101,31 @@ export function Hero({ onRegister }) {
               {site.cta.hero}
             </button>
 
-            <p className="mt-3 text-[13px] text-muted">
-              {e.price} {e.currency} • {site.hero.microcopy}
-            </p>
+            {/* Diqqatni tugmaga qaratuvchi strelkalar */}
+            <div
+              aria-hidden="true"
+              className="mt-3 flex items-center justify-center gap-3 text-lime"
+            >
+              {[0, 1, 2, 3, 4].map((i) => (
+                <svg
+                  key={i}
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="arrow-bounce"
+                  style={{ animationDelay: `${i * 0.09}s` }}
+                >
+                  <path
+                    d="M12 4v14M6 13l6 6 6-6"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -118,16 +140,24 @@ export function ForWhom() {
     <section className="border-b border-line py-12 sm:py-16">
       <div className="wrap">
         <SectionTitle>{site.forWhom.title}</SectionTitle>
-        <div className="mt-7 grid gap-3 sm:grid-cols-3 sm:gap-4">
-          {site.forWhom.cards.map((c) => (
-            <div key={c.role} className="card min-w-0 p-5 sm:p-6">
-              <div className="text-[12px] font-extrabold uppercase tracking-[0.1em] text-lime">
-                {c.role}
-              </div>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted">{c.text}</p>
-            </div>
+
+        <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {site.forWhom.items.map((item) => (
+            <li
+              key={item}
+              className="card flex min-w-0 items-center gap-3.5 px-5 py-4"
+            >
+              <span
+                aria-hidden="true"
+                className="h-2.5 w-2.5 shrink-0 rounded-full bg-lime"
+              />
+              <span className="text-[16px] font-bold leading-snug text-ink sm:text-[17px]">
+                {item}
+              </span>
+            </li>
           ))}
-        </div>
+        </ul>
+
         <p className="mt-6 max-w-[68ch] border-l-2 border-lime pl-4 text-[15px] leading-relaxed text-ink sm:text-[16px]">
           {site.forWhom.endCopy}
         </p>
@@ -225,57 +255,6 @@ export function Program({ onRegister }) {
         >
           {site.cta.mid}
         </button>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------------------------- Sendly proof ---------------------------------- */
-
-export function Proof() {
-  return (
-    <section className="border-b border-line py-12 sm:py-16">
-      <div className="wrap">
-        <SectionTitle>{site.proof.title}</SectionTitle>
-        <p className="mt-3 max-w-[60ch] text-[15px] leading-relaxed text-lime sm:text-[16px]">
-          {site.proof.subtitle}
-        </p>
-
-        <div className="mt-7 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="card-dark p-6 sm:p-7">
-            {site.proof.body.map((p) => (
-              <p
-                key={p}
-                className="mb-3 max-w-[64ch] text-[15px] leading-relaxed text-ink last:mb-0 sm:text-[16px]"
-              >
-                {p}
-              </p>
-            ))}
-            <ul className="mt-5 space-y-2.5">
-              {site.proof.capabilities.map((c) => (
-                <li key={c} className="flex gap-3 text-[14px] leading-relaxed text-muted sm:text-[15px]">
-                  <Check />
-                  <span>{c}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-            {site.proof.chips.map((c) => (
-              <div key={c.big} className="card min-w-0 p-5">
-                <div className="text-[18px] font-extrabold leading-tight text-lime">
-                  {c.big}
-                </div>
-                <div className="mt-1.5 text-[13px] leading-snug text-muted">{c.small}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <p className="mt-6 max-w-[68ch] text-[15px] leading-relaxed text-ink sm:text-[16px]">
-          {site.proof.closing}
-        </p>
       </div>
     </section>
   );
