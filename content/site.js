@@ -29,7 +29,7 @@ export const site = {
   // --- Hero ---
   hero: {
     preheadline: "Tadbirkorlar va rahbarlar uchun 3 soatlik amaliy AI seminar",
-    title: "24/7 ishlaydigan AI-hodimlarni yasashni o'rganing",
+    title: "24/7 ishlaydigan AI‑hodimlarni yasashni o'rganing",
     subtitle:
       "AI-xodimlarni real biznes vazifalariga moslab, ish jarayonlarini avtomatlashtirishni o'rganing.",
     trustLine: "Dasturchi bo'lish shart emas",

@@ -161,7 +161,7 @@ body {
     opacity: 0.65;
   }
   30% {
-    transform: translateY(5px);
+    transform: translateY(-5px);
     opacity: 1;
   }
 }

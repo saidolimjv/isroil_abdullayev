@@ -67,7 +67,7 @@ export function Hero({ onRegister }) {
       <div className="wrap flex flex-1 flex-col items-center justify-start gap-4 pb-6 pt-5 text-center sm:gap-6 sm:pb-10 sm:pt-8">
         <TicketStrip />
 
-        <h1 className="max-w-[16ch] text-[clamp(30px,7.6vw,54px)] font-extrabold leading-[1.06] tracking-[-0.02em] text-ink [overflow-wrap:anywhere]">
+        <h1 className="max-w-[20ch] text-[clamp(27px,7vw,50px)] font-extrabold uppercase leading-[1.08] tracking-[-0.01em] text-ink [overflow-wrap:break-word] [text-wrap:balance]">
           {site.hero.title}
         </h1>
 
@@ -117,7 +117,7 @@ export function Hero({ onRegister }) {
                   style={{ animationDelay: `${i * 0.09}s` }}
                 >
                   <path
-                    d="M12 4v14M6 13l6 6 6-6"
+                    d="M12 20V6M6 11l6-6 6 6"
                     stroke="currentColor"
                     strokeWidth="2.4"
                     strokeLinecap="round"
