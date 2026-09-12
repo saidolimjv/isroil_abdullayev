@@ -264,8 +264,6 @@ export const site = {
   success: {
     title: "Arizangiz qabul qilindi",
     text: "Menejerimiz tez orada siz bilan bog'lanadi.",
-    telegramNote:
-      "Seminar haqidagi yangiliklarni birinchi bo'lib olish uchun Telegram kanalimizga qo'shiling.",
     button: "TELEGRAMGA O'TISH",
   },
 

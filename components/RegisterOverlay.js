@@ -12,7 +12,7 @@ import {
 } from "@/lib/phone";
 
 const TELEGRAM_URL =
-  process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/+Z8fi8cYQmjdmNjli";
+  process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/m/j2MTpxEFMzBi";
 
 // Ism: harflar (lotin + kirill), bo'sh joy, apostrof va defis
 const NAME_RE = /^[\p{L}\s'’-]+$/u;
@@ -457,10 +457,6 @@ export default function RegisterOverlay({ open, onClose }) {
             <p className="mx-auto mt-3 max-w-[420px] text-[16px] leading-relaxed text-ink">
               {site.success.text}
             </p>
-            <p className="mx-auto mt-5 max-w-[420px] text-[14px] leading-relaxed text-muted">
-              {site.success.telegramNote}
-            </p>
-
             <a
               href={TELEGRAM_URL}
               target="_blank"
