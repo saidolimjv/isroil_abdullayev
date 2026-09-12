@@ -197,14 +197,35 @@ export const site = {
       "Ariza qoldiring — menejerimiz siz bilan bog'lanib, ishtirok tafsilotlarini tushuntiradi.",
   },
 
+  // --- Formadan oldingi savol (kvalifikatsiya) ---
+  qualify: {
+    title: "Bir savol \u{1F642}",
+    intro: "Seminar Toshkentda, MFaktor'da offline o'tadi.",
+    yes: "Ha, kela olaman \u2705",
+    no: "Yo'q, kela olmayman",
+  },
+
+  // --- "Kela olmayman" javobi ---
+  declined: {
+    emoji: "\u{1F64F}",
+    title: "Tushunarli, rahmat!",
+    body: [
+      "Bu seminar faqat Toshkentda offline o'tadi — shuning uchun bu safar sizga to'g'ri kelmasligi mumkin.",
+      "Kelajakda onlayn format chiqsa, sizni albatta xabardor qilamiz. Qiziqishingiz uchun rahmat! \u{1F64C}",
+    ],
+    button: "Yopish",
+  },
+
   // --- Forma ---
   form: {
     title: "Joyingizni band qiling",
     subtitle:
       "Ma'lumotlaringizni qoldiring — menejerimiz seminar tafsilotlari bo'yicha siz bilan bog'lanadi.",
 
+    priceNote: "Ishtirok narxi: 200 000 so'm",
+
     nameLabel: "Ismingiz",
-    namePlaceholder: "Masalan: Aziz",
+    namePlaceholder: "Ismingiz",
 
     phoneLabel: "Telefon raqamingiz",
     phonePlaceholder: "90 123-45-67",

@@ -46,10 +46,14 @@ export async function POST(req) {
     return Response.json({ ok: false, error: "validation" }, { status: 400 });
   }
 
-  // Ikkita ALOHIDA event_id — ikkalasi ham browser+server o'rtasida bir xil
-  const eventId = crypto.randomUUID();
+  // Ikkita ALOHIDA event_id — ikkalasi ham browser+server o'rtasida bir xil.
+  // Mijoz o'zi yaratib yuborsa, o'shani ishlatamiz: shunda brauzer javobni
+  // kutmasdan piksel eventini yuborishi va keyingi ekranni darhol ko'rsatishi mumkin.
   const isQualified = !!role && role !== "other";
-  const qualifiedEventId = isQualified ? crypto.randomUUID() : null;
+  const eventId = clean(body.event_id, 64) || crypto.randomUUID();
+  const qualifiedEventId = isQualified
+    ? clean(body.qualified_event_id, 64) || crypto.randomUUID()
+    : null;
 
   const ua = req.headers.get("user-agent") || "";
   const ip =
@@ -79,15 +83,39 @@ export async function POST(req) {
     );
   }
 
-  const results = await Promise.allSettled(jobs);
   const labels = ["sheets", "meta:CompleteRegistration", "meta:QualifiedLead"];
-  results.forEach((r, i) => {
-    if (r.status === "rejected") {
-      console.error(labels[i], r.reason?.message || r.reason);
-    }
+  const work = Promise.allSettled(jobs).then((results) => {
+    results.forEach((r, i) => {
+      if (r.status === "rejected") {
+        console.error(labels[i], r.reason?.message || r.reason);
+      }
+    });
   });
 
+  // Google Apps Script 2-10 soniya ishlashi mumkin. Foydalanuvchini
+  // kuttirmaslik uchun javobni darhol qaytaramiz, ishni fonda tugatamiz.
+  // Vercel'da funksiya javobdan keyin to'xtamasligi uchun waitUntil kerak.
+  await runInBackground(work);
+
   return Response.json({ ok: true, eventId, qualifiedEventId });
+}
+
+/**
+ * Ishni javobdan keyin davom ettiradi. Vercel'da `waitUntil` bo'lsa —
+ * o'shani ishlatamiz; bo'lmasa (lokal dev yoki boshqa hosting) oddiygina
+ * kutamiz, chunki kutmasak ish bajarilmay qolishi mumkin.
+ */
+async function runInBackground(promise) {
+  try {
+    const mod = await import("@vercel/functions");
+    if (typeof mod.waitUntil === "function") {
+      mod.waitUntil(promise);
+      return;
+    }
+  } catch (e) {
+    // paket yo'q — pastdagi zaxira yo'l ishlaydi
+  }
+  await promise;
 }
 
 /* -------------------------------- Google Sheets ----------------------------------- */
@@ -110,6 +138,7 @@ async function sendToGoogleSheets({
     method: "POST",
     headers: { "Content-Type": "application/json" },
     redirect: "follow",
+    signal: AbortSignal.timeout(20000),
     body: JSON.stringify({
       name,
       phone,

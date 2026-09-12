@@ -24,7 +24,8 @@ function currentVariant() {
 
 export default function RegisterOverlay({ open, onClose }) {
   const t = site.form;
-  const [step, setStep] = useState("form");
+  // "qualify" → "form" → "success"  |  "qualify" → "declined"
+  const [step, setStep] = useState("qualify");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState("");
@@ -38,7 +39,7 @@ export default function RegisterOverlay({ open, onClose }) {
 
   useEffect(() => {
     if (!open) return;
-    setStep("form");
+    setStep("qualify");
     setNetError("");
     setSending(false);
     setSubmitted(false);
@@ -46,7 +47,9 @@ export default function RegisterOverlay({ open, onClose }) {
     setRoleOpen(false);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const id = setTimeout(() => nameRef.current?.focus(), 120);
+    const id = setTimeout(() => {
+      if (step === "form") nameRef.current?.focus();
+    }, 120);
     return () => {
       document.body.style.overflow = prev;
       clearTimeout(id);
@@ -135,63 +138,64 @@ export default function RegisterOverlay({ open, onClose }) {
     setSending(true);
     track("form_submit", { role });
 
-    try {
-      const attribution = readAttribution();
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: toE164Digits(digits), // "998901987654"
-          phone_raw: formatFull(digits), // "+998 (90) 198-76-54"
-          role,
-          role_label: roleLabel,
-          variant: currentVariant(),
-          pageUrl: window.location.href,
-          fbp: getCookie("_fbp"),
-          fbc: getCookie("_fbc"),
-          ...attribution,
-        }),
-      });
-      const data = await res.json().catch(() => ({}));
+    // Event ID'larni SHU YERDA yaratamiz — shunda serverdan javob kutmasdan
+    // piksel eventini yuborib, keyingi ekranni darhol ko'rsata olamiz.
+    // Server ham aynan shu ID'larni ishlatadi, ya'ni dedup buzilmaydi.
+    const eventId = makeId();
+    const qualified = !!role && role !== "other";
+    const qualifiedEventId = qualified ? makeId() : null;
 
-      if (typeof window.fbq === "function") {
-        // 1) Standart konversiya — server CAPI bilan bir xil event_id
-        window.fbq(
-          "track",
-          "CompleteRegistration",
-          {
-            content_name: "seminar_20sep",
-            content_category: role,
-            value: 200000,
-            currency: "UZS",
-          },
-          data.eventId ? { eventID: data.eventId } : undefined
-        );
+    const payload = {
+      name: name.trim(),
+      phone: toE164Digits(digits),
+      phone_raw: formatFull(digits),
+      role,
+      role_label: roleLabel,
+      variant: currentVariant(),
+      pageUrl: window.location.href,
+      fbp: getCookie("_fbp"),
+      fbc: getCookie("_fbc"),
+      event_id: eventId,
+      qualified_event_id: qualifiedEventId,
+      ...readAttribution(),
+    };
 
-        // 2) Sifatli lead — ALOHIDA event_id, faqat role !== "other" bo'lsa
-        if (data.qualifiedEventId) {
-          window.fbq(
-            "trackCustom",
-            "QualifiedLead",
-            {
-              content_name: "seminar_20sep",
-              content_category: role,
-              value: 200000,
-              currency: "UZS",
-            },
-            { eventID: data.qualifiedEventId }
-          );
-        }
+    // So'rovni yuboramiz, lekin UI uni kutib turmaydi.
+    // keepalive: sahifa almashsa ham so'rov yo'lda davom etadi.
+    const request = fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    });
+    request.catch(() => {});
+
+    if (typeof window.fbq === "function") {
+      const params = {
+        content_name: "seminar_20sep",
+        content_category: role,
+        value: 200000,
+        currency: "UZS",
+      };
+      window.fbq("track", "CompleteRegistration", params, { eventID: eventId });
+      if (qualifiedEventId) {
+        window.fbq("trackCustom", "QualifiedLead", params, {
+          eventID: qualifiedEventId,
+        });
       }
-
-      track("lead_success", { role });
-      setStep("success");
-    } catch (err) {
-      setNetError(t.errors.network);
-    } finally {
-      setSending(false);
     }
+
+    track("lead_success", { role });
+
+    // Server sekin javob bersa ham (Google Sheets 2-10s), foydalanuvchi
+    // ko'pi bilan 1.2 soniya kutadi.
+    await Promise.race([
+      request.catch(() => null),
+      new Promise((r) => setTimeout(r, 1200)),
+    ]);
+
+    setSending(false);
+    setStep("success");
   }
 
   const fieldBase =
@@ -213,12 +217,75 @@ export default function RegisterOverlay({ open, onClose }) {
           </button>
         </div>
 
-        {step === "form" ? (
+        {step === "qualify" ? (
+          <div className="flex flex-1 flex-col justify-center py-4">
+            <h2 className="text-[28px] font-extrabold leading-[1.12] tracking-tight text-ink sm:text-[32px]">
+              {site.qualify.title}
+            </h2>
+            <p className="mt-3 text-[15px] leading-relaxed text-muted">
+              {site.qualify.intro}
+            </p>
+            <p className="mt-1 text-[15px] font-bold text-ink">
+              {site.event.dateLabel} · {site.event.time}
+            </p>
+
+            <p className="mt-7 text-center text-[20px] font-extrabold leading-snug text-ink sm:text-[22px]">
+              Toshkentga kelib, ishtirok eta olasizmi?
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                track("qualify_yes");
+                setStep("form");
+                setTimeout(() => nameRef.current?.focus(), 80);
+              }}
+              className="btn-cta mt-6 w-full"
+            >
+              {site.qualify.yes}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                track("qualify_no");
+                setStep("declined");
+              }}
+              className="mt-3 min-h-[48px] w-full rounded-full border border-line bg-surface px-7 py-4 text-[15px] font-bold text-muted transition-colors hover:text-ink"
+            >
+              {site.qualify.no}
+            </button>
+          </div>
+        ) : step === "declined" ? (
+          <div className="flex flex-1 flex-col justify-center py-6 text-center">
+            <div className="text-[56px] leading-none" aria-hidden="true">
+              {site.declined.emoji}
+            </div>
+            <h2 className="mt-5 text-[26px] font-extrabold leading-[1.15] tracking-tight text-ink sm:text-[30px]">
+              {site.declined.title}
+            </h2>
+            {site.declined.body.map((t) => (
+              <p
+                key={t}
+                className="mx-auto mt-4 max-w-[430px] text-[15px] leading-relaxed text-muted"
+              >
+                {t}
+              </p>
+            ))}
+            <button type="button" onClick={onClose} className="btn-cta mt-7 w-full">
+              {site.declined.button}
+            </button>
+          </div>
+        ) : step === "form" ? (
           <div className="flex flex-1 flex-col justify-center py-4">
             <h2 className="text-[28px] font-extrabold leading-[1.12] tracking-tight text-ink sm:text-[34px]">
               {t.title}
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-muted">{t.subtitle}</p>
+
+            <div className="mt-5 rounded-2xl border border-lime/40 bg-lime/10 px-5 py-3.5 text-center text-[16px] font-extrabold text-lime">
+              {t.priceNote}
+            </div>
 
             {/* 1. Ism */}
             <div className="mt-7">
@@ -414,6 +481,14 @@ function FieldError({ children }) {
     <p role="alert" className="mt-2 text-[13px] font-medium text-red-500">
       {children}
     </p>
+  );
+}
+
+/** Barcha brauzerlarda ishlaydigan noyob ID */
+function makeId() {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID();
+  return (
+    Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 12)
   );
 }
 
