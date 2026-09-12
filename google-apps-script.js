@@ -1,22 +1,29 @@
 /**
  * ISROIL SEMINAR — Google Sheets webhook
  *
- * Bu versiya ustunlarni SARLAVHA NOMI bo'yicha to'ldiradi.
- * Ya'ni ustunlar tartibini o'zgartirsangiz ham, yangi maydon qo'shilsa ham
- * hech narsa buzilmaydi — skriptni qayta yozish shart emas.
- * Jadval bo'sh bo'lsa, sarlavhalarni o'zi yaratadi.
+ * Ustunlarni SARLAVHA NOMI bo'yicha to'ldiradi: tartibni o'zgartirsangiz ham,
+ * yangi maydon qo'shilsa ham buzilmaydi. Yetishmaydigan ustun o'zi qo'shiladi.
  *
- * O'RNATISH / YANGILASH:
- * 1. Google Sheet oching → Kengaytmalar → Apps Script
- * 2. Ochilgan oynadagi BARCHA eski kodni o'chirib, shu faylni joylashtiring.
- * 3. SHEET_ID ni tekshiring (jadval manzilidagi /d/ va /edit orasidagi qator).
- * 4. Saqlang (Ctrl+S).
- * 5. MUHIM: Deploy → Manage deployments → qalam belgisi →
- *    Version: "New version" → Deploy.
- *    Agar shuni qilmasangiz, eski kod ishlashda davom etadi
- *    va yangi ustunlar (masalan "role") jadvalga TUSHMAYDI.
- *    Web app URL o'zgarmaydi.
+ * ============ O'RNATISH ============
+ * 1. Google Sheet → Kengaytmalar → Apps Script
+ * 2. Eski kodni BUTUNLAY o'chirib, shu faylni joylashtiring
+ * 3. Ctrl+S (saqlash)
+ * 4. Deploy → "Manage deployments" (YANGI deployment EMAS!)
+ *      → qalam belgisi (✏️) → Version: "New version" → Deploy
+ *
+ * ⚠️ ENG KO'P UCHRAYDIGAN XATO:
+ * "New deployment" bosilsa, Google YANGI URL yaratadi. Vercel'dagi
+ * GOOGLE_SHEETS_WEBHOOK_URL esa eski URL'ga ishora qilib turaveradi —
+ * natijada jadvalga hamon ESKI kod yozadi. Shuning uchun har doim
+ * "Manage deployments → New version" ishlating: URL o'zgarmaydi.
+ *
+ * ============ TEKSHIRISH ============
+ * Web app URL'ini (/exec bilan tugaydigan) brauzerda oching.
+ * Javobda "version": "2026-09-12-v3" chiqishi kerak.
+ * Boshqa narsa chiqsa yoki xato bersa — eski kod jonli, qayta deploy qiling.
  */
+
+var VERSION = "2026-09-12-v3";
 
 var SHEET_ID = "1bW1G3G6Ew0WFCIn6337OS6UfWok8YHn3ZcxZwcTTq0I";
 
@@ -39,6 +46,19 @@ var COLUMNS = [
   ["audience", "audience"],
   ["event_id", "event_id"],
 ];
+
+/**
+ * Brauzerda /exec manzilini ochsangiz — qaysi versiya JONLI ekanini ko'rsatadi.
+ * Agar bu yerda "2026-09-12-v3" chiqmasa, demak eski kod ishlayapti
+ * va "New version" bilan qayta deploy qilish kerak.
+ */
+function doGet() {
+  return json({
+    ok: true,
+    version: VERSION,
+    columns: COLUMNS.map(function (c) { return c[0]; }),
+  });
+}
 
 function doPost(e) {
   try {
@@ -82,9 +102,9 @@ function doPost(e) {
 
     sheet.appendRow(row);
 
-    return json({ ok: true });
+    return json({ ok: true, version: VERSION });
   } catch (err) {
-    return json({ ok: false, error: String(err) });
+    return json({ ok: false, version: VERSION, error: String(err) });
   }
 }
 
